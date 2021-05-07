@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private const float skinWidth = .02f;
     private const int totalHorizontalRays = 8;
     private const int totalVerticalRays = 4;
+    public int currentNumberOfJumps = 0;
 
     public LayerMask platformMask;
     public PlayerParameters defaultParameters;
@@ -19,15 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            if (parameters.JumpRestrictions == PlayerParameters.jumpBehavior.CanJumpAnywhere)
-            {
-                return _jumpIn < 0;
-            }
-            if (parameters.JumpRestrictions == PlayerParameters.jumpBehavior.CanJumpOnGround)
-            {
-                return state.isGrounded;
-            }
-            return false;
+            return _jumpIn <  0 &&(state.isGrounded || currentNumberOfJumps <= parameters.numberOfDoubleJumps);
         }
     }
 
@@ -42,7 +35,6 @@ public class PlayerController : MonoBehaviour
     private Vector3
         _activeGlobalPlatformPoint,
         _activeLocalPlatformPoint;
-
 
     private Vector3
         _raycastTopLeft,
@@ -89,7 +81,8 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        AddForce(new Vector2(0, parameters.jumpMagnitude));
+        currentNumberOfJumps++;
+        AddForce(new Vector2(_velocity.x, parameters.jumpMagnitude));
         _jumpIn = parameters.jumpFrequency;
     }
 
@@ -187,7 +180,6 @@ public class PlayerController : MonoBehaviour
         _raycastTopLeft = _transform.position + new Vector3(center.x - size.x + skinWidth, center.y + size.y - skinWidth);
         _raycastBottomRight = _transform.position + new Vector3(center.x + size.x - skinWidth, center.y - size.y + skinWidth);
         _raycastBottomLeft = _transform.position + new Vector3(center.x - size.x + skinWidth, center.y - size.y + skinWidth);
-
     }
 
     private void MoveHorizontally(ref Vector2 deltaMovement)
@@ -274,6 +266,7 @@ public class PlayerController : MonoBehaviour
             {
                 deltaMovement.y += skinWidth;
                 state.isCollidingBelow = true;
+                currentNumberOfJumps = 0;
             }
 
             if (rayDistance < skinWidth + .0001f)

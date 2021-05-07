@@ -1238,6 +1238,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3028600661079628200, guid: 38cae456412fd67459573b1272a144ed, type: 3}
+      propertyPath: defaultParameters.jumpFrequency
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028600661079628200, guid: 38cae456412fd67459573b1272a144ed, type: 3}
+      propertyPath: defaultParameters.jumpMagnitude
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028600661079628200, guid: 38cae456412fd67459573b1272a144ed, type: 3}
+      propertyPath: defaultParameters.JumpRestrictions
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028600661079628200, guid: 38cae456412fd67459573b1272a144ed, type: 3}
+      propertyPath: defaultParameters.numberOfDoubleJumps
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3028600661079628205, guid: 38cae456412fd67459573b1272a144ed, type: 3}
       propertyPath: m_Name
       value: Player
