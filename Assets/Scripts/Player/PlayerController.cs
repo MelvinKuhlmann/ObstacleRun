@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     private const float skinWidth = .02f;
     private const int totalHorizontalRays = 8;
     private const int totalVerticalRays = 4;
-    public int currentNumberOfJumps = 0;
+    private int currentNumberOfJumps = 0;
 
     public LayerMask platformMask;
     public PlayerParameters defaultParameters;
