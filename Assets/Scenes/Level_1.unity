@@ -1345,6 +1345,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3263575126737039602, guid: 8c19a59f253da694ba6546c10796a626, type: 3}
+      propertyPath: platformMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 3263575126737039605, guid: 8c19a59f253da694ba6546c10796a626, type: 3}
       propertyPath: m_Name
       value: Ghost_Player
