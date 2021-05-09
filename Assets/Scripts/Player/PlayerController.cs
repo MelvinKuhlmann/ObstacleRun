@@ -2,9 +2,10 @@
 
 public class PlayerController : MonoBehaviour
 {
-    private const float skinWidth = .02f;
-    private const int totalHorizontalRays = 8;
-    private const int totalVerticalRays = 4;
+    private const float SKIN_WIDTH = .02f;
+    private const int TOTAL_HORIZONTAL_RAYS = 8;
+    private const int TOTAL_VERTICAL_RAYS = 4;
+
     private int currentNumberOfJumps = 0;
 
     public LayerMask platformMask;
@@ -13,33 +14,33 @@ public class PlayerController : MonoBehaviour
     public PlayerState state { get; private set; }
     public Vector2 velocity { get { return _velocity; } }
     public bool handleCollisions { get; set; }
-    public PlayerParameters parameters { get { return _overrideParameters ?? defaultParameters; } }
+    public PlayerParameters parameters { get { return overrideParameters ?? defaultParameters; } }
     public GameObject standingOn { get; private set; }
     public Vector3 platformVelocity { get; private set; }
     public bool canJump
     {
         get
         {
-            return _jumpIn <  0 &&(state.isGrounded || currentNumberOfJumps <= parameters.numberOfDoubleJumps);
+            return jumpIn <  0 &&(state.isGrounded || currentNumberOfJumps <= parameters.numberOfDoubleJumps);
         }
     }
 
     private Vector2 _velocity;
     private Transform _transform;
-    private Vector3 _localScale;
-    private BoxCollider2D _boxCollider;
-    private PlayerParameters _overrideParameters;
-    private float _jumpIn;
-    private GameObject _lastStandingOn;
+    private Vector3 localScale;
+    private BoxCollider2D boxCollider;
+    private PlayerParameters overrideParameters;
+    private float jumpIn;
+    private GameObject lastStandingOn;
 
     private Vector3
         _activeGlobalPlatformPoint,
         _activeLocalPlatformPoint;
 
     private Vector3
-        _raycastTopLeft,
-        _raycastBottomLeft,
-        _raycastBottomRight;
+        raycastTopLeft,
+        raycastBottomLeft,
+        raycastBottomRight;
 
     private float verticalDistanceBetweenRays;
     private float horizontalDistanceBetweenRays;
@@ -49,14 +50,21 @@ public class PlayerController : MonoBehaviour
         handleCollisions = true;
         state = new PlayerState();
         _transform = transform;
-        _localScale = _transform.localScale;
-        _boxCollider = GetComponent<BoxCollider2D>();
+        localScale = _transform.localScale;
+        boxCollider = GetComponent<BoxCollider2D>();
 
-        var colliderWidth = _boxCollider.size.x * Mathf.Abs(_localScale.x) - (2 * skinWidth);
-        horizontalDistanceBetweenRays = colliderWidth / (totalVerticalRays - 1);
+        var colliderWidth = boxCollider.size.x * Mathf.Abs(localScale.x) - (2 * SKIN_WIDTH);
+        horizontalDistanceBetweenRays = colliderWidth / (TOTAL_VERTICAL_RAYS - 1);
 
-        var colliderHeight = _boxCollider.size.y * Mathf.Abs(_localScale.y) - (2 * skinWidth);
-        verticalDistanceBetweenRays = colliderHeight / (totalHorizontalRays - 1);
+        var colliderHeight = boxCollider.size.y * Mathf.Abs(localScale.y) - (2 * SKIN_WIDTH);
+        verticalDistanceBetweenRays = colliderHeight / (TOTAL_HORIZONTAL_RAYS - 1);
+    }
+
+    public void LateUpdate()
+    {
+        jumpIn -= Time.deltaTime;
+        _velocity.y += parameters.gravity * Time.deltaTime;
+        Move(velocity * Time.deltaTime);
     }
 
     public void AddForce(Vector2 force)
@@ -78,24 +86,16 @@ public class PlayerController : MonoBehaviour
     {
         _velocity.y = y;
     }
-
     public void Jump()
     {
         currentNumberOfJumps++;
         AddForce(new Vector2(_velocity.x, parameters.jumpMagnitude));
-        _jumpIn = parameters.jumpFrequency;
-    }
-
-    public void LateUpdate()
-    {
-        _jumpIn -= Time.deltaTime;
-        _velocity.y += parameters.gravity * Time.deltaTime;
-        Move(velocity * Time.deltaTime);
+        jumpIn = parameters.jumpFrequency;
     }
 
     private void Move(Vector2 deltaMovement)
     {
-        var wasGrounded = state.isCollidingBelow;
+        bool wasGrounded = state.isCollidingBelow;
         state.Reset();
 
         if (handleCollisions)
@@ -129,36 +129,36 @@ public class PlayerController : MonoBehaviour
             _activeGlobalPlatformPoint = transform.position;
             _activeLocalPlatformPoint = standingOn.transform.InverseTransformPoint(transform.position);
 
-            if (_lastStandingOn != standingOn)
+            if (lastStandingOn != standingOn)
             {
-                if (_lastStandingOn != null)
+                if (lastStandingOn != null)
                 {
-                    _lastStandingOn.SendMessage("ControllerExit2D", this, SendMessageOptions.DontRequireReceiver);
+                    lastStandingOn.SendMessage("ControllerExit2D", this, SendMessageOptions.DontRequireReceiver);
                 }
                 standingOn.SendMessage("ControllerEnter2D", this, SendMessageOptions.DontRequireReceiver);
-                _lastStandingOn = standingOn;
+                lastStandingOn = standingOn;
             }
             else if (standingOn != null)
             {
                 standingOn.SendMessage("ControllerStay2D", this, SendMessageOptions.DontRequireReceiver);
             }
         }
-        else if (_lastStandingOn != null)
+        else if (lastStandingOn != null)
         {
-            _lastStandingOn.SendMessage("ControllerExit2D", this, SendMessageOptions.DontRequireReceiver);
-            _lastStandingOn = null;
+            lastStandingOn.SendMessage("ControllerExit2D", this, SendMessageOptions.DontRequireReceiver);
+            lastStandingOn = null;
 
         }
     }
 
     private void CorrectHorizontalPlacement(ref Vector2 deltaMovement, bool isRight)
     {
-        var halfWidth = (_boxCollider.size.x * _localScale.x) / 2f;
-        var rayOrigin = (_raycastBottomRight + _raycastBottomLeft) / 2;
+        var halfWidth = (boxCollider.size.x * localScale.x) / 2f;
+        var rayOrigin = (raycastBottomRight + raycastBottomLeft) / 2;
         var rayDirection = isRight ? Vector2.right : -Vector2.right;
         var offset = 0f;
 
-        for (var i = 1; i < totalHorizontalRays - 1; i++)
+        for (var i = 1; i < TOTAL_HORIZONTAL_RAYS - 1; i++)
         {
             var rayVector = new Vector2(deltaMovement.x + rayOrigin.x, deltaMovement.y + rayOrigin.y + (i * verticalDistanceBetweenRays));
             Debug.DrawRay(rayVector, rayDirection * halfWidth, isRight ? Color.cyan : Color.magenta);
@@ -174,22 +174,22 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateRayOrigins()
     {
-        var size = new Vector2(_boxCollider.size.x * Mathf.Abs(_localScale.x), _boxCollider.size.y * Mathf.Abs(_localScale.y)) / 2;
-        var center = new Vector2(_boxCollider.offset.x * _localScale.x, _boxCollider.offset.y * _localScale.y);
+        var size = new Vector2(boxCollider.size.x * Mathf.Abs(localScale.x), boxCollider.size.y * Mathf.Abs(localScale.y)) / 2;
+        var center = new Vector2(boxCollider.offset.x * localScale.x, boxCollider.offset.y * localScale.y);
 
-        _raycastTopLeft = _transform.position + new Vector3(center.x - size.x + skinWidth, center.y + size.y - skinWidth);
-        _raycastBottomRight = _transform.position + new Vector3(center.x + size.x - skinWidth, center.y - size.y + skinWidth);
-        _raycastBottomLeft = _transform.position + new Vector3(center.x - size.x + skinWidth, center.y - size.y + skinWidth);
+        raycastTopLeft = _transform.position + new Vector3(center.x - size.x + SKIN_WIDTH, center.y + size.y - SKIN_WIDTH);
+        raycastBottomRight = _transform.position + new Vector3(center.x + size.x - SKIN_WIDTH, center.y - size.y + SKIN_WIDTH);
+        raycastBottomLeft = _transform.position + new Vector3(center.x - size.x + SKIN_WIDTH, center.y - size.y + SKIN_WIDTH);
     }
 
     private void MoveHorizontally(ref Vector2 deltaMovement)
     {
         var isGoingRight = deltaMovement.x > 0;
-        var rayDistance = Mathf.Abs(deltaMovement.x) + skinWidth;
+        var rayDistance = Mathf.Abs(deltaMovement.x) + SKIN_WIDTH;
         var rayDirection = isGoingRight ? Vector2.right : -Vector2.right;
-        var rayOrigin = isGoingRight ? _raycastBottomRight : _raycastBottomLeft;
+        var rayOrigin = isGoingRight ? raycastBottomRight : raycastBottomLeft;
 
-        for (var i = 0; i < totalHorizontalRays; i++)
+        for (var i = 0; i < TOTAL_HORIZONTAL_RAYS; i++)
         {
             var rayVector = new Vector2(rayOrigin.x, rayOrigin.y + (i * verticalDistanceBetweenRays));
             Debug.DrawRay(rayVector, rayDirection * rayDistance, Color.red);
@@ -206,16 +206,16 @@ public class PlayerController : MonoBehaviour
 
             if (isGoingRight)
             {
-                deltaMovement.x -= skinWidth;
+                deltaMovement.x -= SKIN_WIDTH;
                 state.isCollidingRight = true;
             }
             else
             {
-                deltaMovement.x += skinWidth;
+                deltaMovement.x += SKIN_WIDTH;
                 state.isCollidingLeft = true;
             }
 
-            if (rayDistance < skinWidth + .0001f)
+            if (rayDistance < SKIN_WIDTH + .0001f)
             {
                 break;
             }
@@ -225,15 +225,15 @@ public class PlayerController : MonoBehaviour
     private void MoveVertically(ref Vector2 deltaMovement)
     {
         var isGoingUp = deltaMovement.y > 0;
-        var rayDistance = Mathf.Abs(deltaMovement.y) + skinWidth;
+        var rayDistance = Mathf.Abs(deltaMovement.y) + SKIN_WIDTH;
         var rayDirection = isGoingUp ? Vector2.up : -Vector2.up;
-        var rayOrigin = isGoingUp ? _raycastTopLeft : _raycastBottomLeft;
+        var rayOrigin = isGoingUp ? raycastTopLeft : raycastBottomLeft;
 
         rayOrigin.x += deltaMovement.x;
 
         var standingOnDistance = float.MaxValue;
 
-        for (var i = 0; i < totalVerticalRays; i++)
+        for (var i = 0; i < TOTAL_VERTICAL_RAYS; i++)
         {
             var rayVector = new Vector2(rayOrigin.x + (i * horizontalDistanceBetweenRays), rayOrigin.y);
             Debug.DrawRay(rayVector, rayDirection * rayDistance, Color.red);
@@ -259,17 +259,17 @@ public class PlayerController : MonoBehaviour
 
             if (isGoingUp)
             {
-                deltaMovement.y -= skinWidth;
+                deltaMovement.y -= SKIN_WIDTH;
                 state.isCollidingAbove = true;
             }
             else
             {
-                deltaMovement.y += skinWidth;
+                deltaMovement.y += SKIN_WIDTH;
                 state.isCollidingBelow = true;
                 currentNumberOfJumps = 0;
             }
 
-            if (rayDistance < skinWidth + .0001f)
+            if (rayDistance < SKIN_WIDTH + .0001f)
             {
                 break;
             }
@@ -283,7 +283,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        _overrideParameters = parameters.parameters;
+        overrideParameters = parameters.parameters;
     }
 
     public void OnTriggerExit2D(Collider2D other)
@@ -293,6 +293,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        _overrideParameters = null;
+        overrideParameters = null;
     }
 }
