@@ -8,23 +8,6 @@ public class PlayerController : MonoBehaviour
 
     private int currentNumberOfJumps = 0;
 
-    public LayerMask platformMask;
-    public PlayerParameters defaultParameters;
-
-    public PlayerState state { get; private set; }
-    public Vector2 velocity { get { return _velocity; } }
-    public bool handleCollisions { get; set; }
-    public PlayerParameters parameters { get { return overrideParameters ?? defaultParameters; } }
-    public GameObject standingOn { get; private set; }
-    public Vector3 platformVelocity { get; private set; }
-    public bool canJump
-    {
-        get
-        {
-            return jumpIn <  0 &&(state.isGrounded || currentNumberOfJumps <= parameters.numberOfDoubleJumps);
-        }
-    }
-
     private Vector2 _velocity;
     private Transform _transform;
     private Vector3 localScale;
@@ -45,8 +28,28 @@ public class PlayerController : MonoBehaviour
     private float verticalDistanceBetweenRays;
     private float horizontalDistanceBetweenRays;
 
+    private bool isMoving;
+
+    public LayerMask platformMask;
+    public PlayerParameters defaultParameters;
+
+    public PlayerState state { get; private set; }
+    public Vector2 velocity { get { return _velocity; } }
+    public bool handleCollisions { get; set; }
+    public PlayerParameters parameters { get { return overrideParameters ?? defaultParameters; } }
+    public GameObject standingOn { get; private set; }
+    public Vector3 platformVelocity { get; private set; }
+    public bool canJump
+    {
+        get
+        {
+            return jumpIn <  0 &&(state.isGrounded || currentNumberOfJumps <= parameters.numberOfDoubleJumps);
+        }
+    }
+
     public void Awake()
     {
+        isMoving = false;
         handleCollisions = true;
         state = new PlayerState();
         _transform = transform;
@@ -206,17 +209,20 @@ public class PlayerController : MonoBehaviour
 
             if (isGoingRight)
             {
+                isMoving = true;
                 deltaMovement.x -= SKIN_WIDTH;
                 state.isCollidingRight = true;
             }
             else
             {
+                isMoving = true;
                 deltaMovement.x += SKIN_WIDTH;
                 state.isCollidingLeft = true;
             }
 
             if (rayDistance < SKIN_WIDTH + .0001f)
             {
+                Debug.Log("Test");
                 break;
             }
         }
