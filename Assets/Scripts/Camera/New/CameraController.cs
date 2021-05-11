@@ -4,7 +4,7 @@ public class CameraController : MonoBehaviour
 {
     public Transform player;
     public float smoothSpeed = 0.125F; 
-    public Vector3 offset = new Vector3(1, 3, -1); // Standaard waarden, kunnen we later nog tweaken.
+    public Vector3 offset = new Vector3(1, 6, -1); // Standaard waarden, kunnen we later nog tweaken.
 
     private void FixedUpdate()
     {
