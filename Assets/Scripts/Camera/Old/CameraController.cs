@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
@@ -47,4 +47,4 @@ public class CameraController : MonoBehaviour
 
         transform.position = new Vector3(x, y, transform.position.z);
     }
-}
+}*/

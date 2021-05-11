@@ -1,4 +1,4 @@
-﻿public class PlayerState
+﻿/*public class PlayerState
 {
     public bool isCollidingRight { get; set; }
     public bool isCollidingLeft { get; set; }
@@ -24,3 +24,4 @@
             isCollidingBelow);
     }
 }
+*/

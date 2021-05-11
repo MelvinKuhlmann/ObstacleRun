@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -92,3 +92,4 @@ public class Player : MonoBehaviour
         isFacingRight = transform.localScale.x > 0;
     }
 }
+*/
