@@ -2,15 +2,20 @@
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerState state;
+    private PlayerHorizontalState horizontalState;
+    private PlayerVerticalState verticalState;
     private Animator animator;
+    private Rigidbody2D rigidBody;
 
-    public float moveSpeed = 5F;
+    public float moveSpeed = 10F;
+    public float jumpHeight = 25F;
     
     void Start()
     {
-        state = PlayerState.IDLE;
+        horizontalState = PlayerHorizontalState.IDLE;
+        verticalState = PlayerVerticalState.GROUNDED;
         animator = GetComponent<Animator>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -25,37 +30,44 @@ public class PlayerController : MonoBehaviour
 
     private void HandleState()
     {
-        switch (state)
+        switch (horizontalState)
         {
-            case PlayerState.IDLE:
+            case PlayerHorizontalState.IDLE:
                 ChangeAnimation("idle");
                 break;
-            case PlayerState.RUNNING_LEFT:
+            case PlayerHorizontalState.RUNNING_LEFT:
                 transform.position -= transform.right * (Time.deltaTime * moveSpeed);
                 ChangeAnimation("run_left");
                 break;
-            case PlayerState.RUNNING_RIGHT:
+            case PlayerHorizontalState.RUNNING_RIGHT:
                 transform.position += transform.right * (Time.deltaTime * moveSpeed);
                 ChangeAnimation("run_right");
                 break;
             default:
                 break;
-        }
+        }        
     }
 
     private void HandleKeyboard()
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            state = PlayerState.RUNNING_RIGHT;
+            horizontalState = PlayerHorizontalState.RUNNING_RIGHT;
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            state = PlayerState.RUNNING_LEFT;
+            horizontalState = PlayerHorizontalState.RUNNING_LEFT;
         } else
         {
-            state = PlayerState.IDLE;
+            horizontalState = PlayerHorizontalState.IDLE;
         }
+
+        if(Input.GetKey(KeyCode.Space) && verticalState.Equals(PlayerVerticalState.GROUNDED))
+        {
+            rigidBody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
+            verticalState = PlayerVerticalState.JUMPING;
+        }
+       
     }
 
     public void ChangeAnimation(string animationFlag, bool resetAll = true)
@@ -72,6 +84,30 @@ public class PlayerController : MonoBehaviour
         foreach (AnimatorControllerParameter parameter in animator.parameters)
         {
             animator.SetBool(parameter.name, false);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if ("FLOOR".Equals(other.gameObject.tag))
+        {
+            if (verticalState.Equals(PlayerVerticalState.FALLING))
+            {
+                Debug.LogFormat("player landed");
+            }
+            verticalState = PlayerVerticalState.GROUNDED;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if ("FLOOR".Equals(other.gameObject.tag))
+        {
+            if (rigidBody.velocity.y < 0)
+            {
+                Debug.LogFormat("player falling");
+                verticalState = PlayerVerticalState.FALLING;
+            }
         }
     }
 }

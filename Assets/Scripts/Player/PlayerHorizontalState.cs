@@ -1,4 +1,4 @@
-﻿public enum PlayerState
+﻿public enum PlayerHorizontalState
 {
     RUNNING_RIGHT,
     RUNNING_LEFT,
