@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 10F;
     public float jumpHeight = 25F;
+    public ParticleSystem dust;
     
     void Start()
     {
@@ -67,7 +68,6 @@ public class PlayerController : MonoBehaviour
             rigidBody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
             verticalState = PlayerVerticalState.JUMPING;
         }
-       
     }
 
     public void ChangeAnimation(string animationFlag, bool resetAll = true)
@@ -89,25 +89,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if ("FLOOR".Equals(other.gameObject.tag))
-        {
-            if (verticalState.Equals(PlayerVerticalState.FALLING))
-            {
-                Debug.LogFormat("player landed");
-            }
+        if ("FLOOR".Equals(other.gameObject.tag) && !verticalState.Equals(PlayerVerticalState.GROUNDED))
+        {    
+            CreateDust();
             verticalState = PlayerVerticalState.GROUNDED;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    private void CreateDust()
     {
-        if ("FLOOR".Equals(other.gameObject.tag))
-        {
-            if (rigidBody.velocity.y < 0)
-            {
-                Debug.LogFormat("player falling");
-                verticalState = PlayerVerticalState.FALLING;
-            }
-        }
+        dust.Play();
     }
 }
