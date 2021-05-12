@@ -5,11 +5,10 @@ public class PlayerController : MonoBehaviour
     private PlayerState state;
     private Animator animator;
 
-    public float moveSpeed;
+    public float moveSpeed = 5F;
     
     void Start()
     {
-        moveSpeed = 5F;
         state = PlayerState.IDLE;
         animator = GetComponent<Animator>();
     }
