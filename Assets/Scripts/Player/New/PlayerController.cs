@@ -29,15 +29,15 @@ public class PlayerController : MonoBehaviour
         switch (state)
         {
             case PlayerState.IDLE:
-                animator.Play("idle");
+                ChangeAnimation("idle");
                 break;
             case PlayerState.RUNNING_LEFT:
                 transform.position -= transform.right * (Time.deltaTime * moveSpeed);
-                animator.Play("run_left");
+                ChangeAnimation("run_left");
                 break;
             case PlayerState.RUNNING_RIGHT:
                 transform.position += transform.right * (Time.deltaTime * moveSpeed);
-                animator.Play("run_right");
+                ChangeAnimation("run_right");
                 break;
             default:
                 break;
@@ -56,6 +56,23 @@ public class PlayerController : MonoBehaviour
         } else
         {
             state = PlayerState.IDLE;
+        }
+    }
+
+    public void ChangeAnimation(string animationFlag, bool resetAll = true)
+    {
+        if (resetAll)
+        {
+            ResetAnimationParameters();
+        }
+        animator.SetBool(animationFlag, true);
+    }
+
+    private void ResetAnimationParameters()
+    {
+        foreach (AnimatorControllerParameter parameter in animator.parameters)
+        {
+            animator.SetBool(parameter.name, false);
         }
     }
 }
