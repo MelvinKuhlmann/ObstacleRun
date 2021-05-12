@@ -47,12 +47,16 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
-        
-        /*switch (verticalState)
+
+        switch (verticalState)
         {
             case PlayerVerticalState.JUMPING:
+                ChangeAnimation("jump");
                 break;
-        }*/
+            case PlayerVerticalState.FALLING:
+                ChangeAnimation("fall");
+                break;
+        }
     }
 
     private void HandleKeyboard()
@@ -72,7 +76,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.Space) && verticalState.Equals(PlayerVerticalState.GROUNDED))
         {
             rigidBody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-            ChangeAnimation("jump");
             verticalState = PlayerVerticalState.JUMPING;
         }
     }
@@ -86,6 +89,11 @@ public class PlayerController : MonoBehaviour
         animator.SetBool(animationFlag, true);
     }
 
+    public void Fall()
+    {
+        verticalState = PlayerVerticalState.FALLING;
+    }
+
     private void ResetAnimationParameters()
     {
         foreach (AnimatorControllerParameter parameter in animator.parameters)
@@ -97,9 +105,9 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if ("FLOOR".Equals(other.gameObject.tag) && !verticalState.Equals(PlayerVerticalState.GROUNDED))
-        {    
-            CreateDust();
+        {
             ChangeAnimation("idle");
+            CreateDust();
             verticalState = PlayerVerticalState.GROUNDED;
         }
     }

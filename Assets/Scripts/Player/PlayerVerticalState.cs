@@ -1,6 +1,7 @@
 ﻿public enum PlayerVerticalState
 {
     JUMPING,
-    GROUNDED
+    GROUNDED,
+    FALLING
 }
 
