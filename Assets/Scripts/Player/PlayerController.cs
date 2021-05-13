@@ -38,11 +38,11 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerHorizontalState.RUNNING_LEFT:
                 transform.position -= transform.right * (Time.deltaTime * moveSpeed);
-                ChangeAnimation("run_left");
+                ChangeAnimation("run");
                 break;
             case PlayerHorizontalState.RUNNING_RIGHT:
                 transform.position += transform.right * (Time.deltaTime * moveSpeed);
-                ChangeAnimation("run_right");
+                ChangeAnimation("run");
                 break;
             default:
                 break;
@@ -61,12 +61,30 @@ public class PlayerController : MonoBehaviour
 
     private void HandleKeyboard()
     {
+        // Een fail-safe om ervoor te zorgen dat er geen rare dingen gebeuren als men links en rechts tegelijk indrukt.
+        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
+        {
+            return;
+        }
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            // Onderstaande if-statement is om ervoor te zorgen dat de beruchte flip van de sprite er niet meer is.
+            if (horizontalState != PlayerHorizontalState.RUNNING_RIGHT)
+            {
+                animator.Play("idle_right");
+            }
+
             horizontalState = PlayerHorizontalState.RUNNING_RIGHT;
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
+            // Onderstaande if-statement is om ervoor te zorgen dat de beruchte flip van de sprite er niet meer is.
+            if (horizontalState != PlayerHorizontalState.RUNNING_LEFT)
+            {
+                animator.Play("idle_left");
+            }
+
             horizontalState = PlayerHorizontalState.RUNNING_LEFT;
         } else
         {
