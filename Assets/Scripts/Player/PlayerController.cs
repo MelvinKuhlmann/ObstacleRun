@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour
     private PlayerVerticalState verticalState;
     private Animator animator;
     private Rigidbody2D rigidBody;
+    private float jumpIn;
 
+    public float jumpFrequency = 0.7F;
     public float moveSpeed = 10F;
     public float jumpHeight = 25F;
     public ParticleSystem dust;
@@ -27,6 +29,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         HandleState();
+    }
+
+    private void LateUpdate()
+    {
+        jumpIn -= Time.deltaTime;
     }
 
     private void HandleState()
@@ -93,8 +100,12 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space) && verticalState.Equals(PlayerVerticalState.GROUNDED))
         {
-            rigidBody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-            verticalState = PlayerVerticalState.JUMPING;
+            if (jumpIn < 0)
+            {
+                jumpIn = jumpFrequency;
+                rigidBody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
+                verticalState = PlayerVerticalState.JUMPING;
+            }
         }
     }
 
