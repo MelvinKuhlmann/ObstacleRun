@@ -21,13 +21,9 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-        HandleKeyboard();
-    }
-
     void FixedUpdate()
     {
+        HandleMovement();
         HandleState();
     }
 
@@ -38,67 +34,42 @@ public class PlayerController : MonoBehaviour
 
     private void HandleState()
     {
-        switch (horizontalState)
+        if (!PlayerIsInTheAir())
         {
-            case PlayerHorizontalState.IDLE:
-                ChangeAnimation("idle");
-                break;
-            case PlayerHorizontalState.RUNNING_LEFT:
-                transform.position -= transform.right * (Time.deltaTime * moveSpeed);
-                ChangeAnimation("run");
-                break;
-            case PlayerHorizontalState.RUNNING_RIGHT:
-                transform.position += transform.right * (Time.deltaTime * moveSpeed);
-                ChangeAnimation("run");
-                break;
-            default:
-                break;
+            switch (horizontalState)
+            {
+                case PlayerHorizontalState.IDLE:
+                    ChangeAnimation("idle");
+                    break;
+                case PlayerHorizontalState.RUNNING_LEFT:
+                    ChangeAnimation("run");
+                    break;
+                case PlayerHorizontalState.RUNNING_RIGHT:
+                    ChangeAnimation("run");
+                    break;
+                default:
+                    break;
+            }
         }
 
-        switch (verticalState)
+        if (PlayerIsInTheAir())
         {
-            case PlayerVerticalState.JUMPING:
-                ChangeAnimation("jump");
-                break;
-            case PlayerVerticalState.FALLING:
-                ChangeAnimation("fall");
-                break;
+            switch (verticalState)
+            {
+                case PlayerVerticalState.JUMPING:
+                    ChangeAnimation("jump");
+                    break;
+                case PlayerVerticalState.FALLING:
+                    ChangeAnimation("fall");
+                    break;
+            }
         }
+
     }
 
-    private void HandleKeyboard()
+    private void HandleMovement()
     {
-        // Een fail-safe om ervoor te zorgen dat er geen rare dingen gebeuren als men links en rechts tegelijk indrukt.
-        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
-        {
-            return;
-        }
-
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            // Onderstaande if-statement is om ervoor te zorgen dat de beruchte flip van de sprite er niet meer is.
-            if (horizontalState != PlayerHorizontalState.RUNNING_RIGHT)
-            {
-                animator.Play("idle_right");
-            }
-
-            horizontalState = PlayerHorizontalState.RUNNING_RIGHT;
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            // Onderstaande if-statement is om ervoor te zorgen dat de beruchte flip van de sprite er niet meer is.
-            if (horizontalState != PlayerHorizontalState.RUNNING_LEFT)
-            {
-                animator.Play("idle_left");
-            }
-
-            horizontalState = PlayerHorizontalState.RUNNING_LEFT;
-        } else
-        {
-            horizontalState = PlayerHorizontalState.IDLE;
-        }
-
-        if(Input.GetKey(KeyCode.Space) && verticalState.Equals(PlayerVerticalState.GROUNDED))
+        if (Input.GetKey(KeyCode.Space) && !PlayerIsInTheAir())
         {
             if (jumpIn < 0)
             {
@@ -107,6 +78,51 @@ public class PlayerController : MonoBehaviour
                 verticalState = PlayerVerticalState.JUMPING;
             }
         }
+
+        // Een fail-safe om ervoor te zorgen dat er geen rare dingen gebeuren als men links en rechts tegelijk indrukt.
+        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
+        {
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            HandleRightMovement();
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            HandleLeftMovement();
+        }
+        else
+        {
+            horizontalState = PlayerHorizontalState.IDLE;
+        }
+    }
+
+    private void HandleRightMovement()
+    {
+        transform.position += transform.right * (Time.deltaTime * moveSpeed);
+
+        // Onderstaande if-statement is om ervoor te zorgen dat de beruchte flip van de sprite er niet meer is.
+        if (horizontalState != PlayerHorizontalState.RUNNING_RIGHT)
+        {
+            animator.Play("idle_right");
+        }
+
+        horizontalState = PlayerHorizontalState.RUNNING_RIGHT;
+    }
+
+    private void HandleLeftMovement()
+    {
+        transform.position -= transform.right * (Time.deltaTime * moveSpeed);
+
+        // Onderstaande if-statement is om ervoor te zorgen dat de beruchte flip van de sprite er niet meer is.
+        if (horizontalState != PlayerHorizontalState.RUNNING_LEFT)
+        {
+            animator.Play("idle_left");
+        }
+
+        horizontalState = PlayerHorizontalState.RUNNING_LEFT;
     }
 
     public void ChangeAnimation(string animationFlag, bool resetAll = true)
@@ -120,7 +136,10 @@ public class PlayerController : MonoBehaviour
 
     public void Fall()
     {
-        verticalState = PlayerVerticalState.FALLING;
+        if (verticalState != PlayerVerticalState.GROUNDED)
+        {
+            verticalState = PlayerVerticalState.FALLING;
+        }
     }
 
     private void ResetAnimationParameters()
@@ -144,5 +163,20 @@ public class PlayerController : MonoBehaviour
     private void CreateDust()
     {
         dust.Play();
+    }
+
+    private bool PlayerIsInTheAir()
+    {
+        return PlayerIsJumping() || PlayerIsFalling();
+    }
+
+    private bool PlayerIsJumping()
+    {
+        return verticalState == PlayerVerticalState.JUMPING;
+    }
+
+    private bool PlayerIsFalling()
+    {
+        return verticalState == PlayerVerticalState.FALLING;
     }
 }
