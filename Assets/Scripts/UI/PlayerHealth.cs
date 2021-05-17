@@ -44,4 +44,13 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void GetDamage(float damage)
+    {
+        health -= damage;
+    }
+
+    public void ReceiveHealth(float healthReceived)
+    {
+        health += healthReceived;
+    }
 }
