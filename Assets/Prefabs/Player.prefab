@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1172624321}
   - component: {fileID: 1172624323}
   - component: {fileID: 1172624322}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DustPs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4785,7 +4785,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1779386283
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: -5
   m_RenderMode: 0
   m_SortMode: 0
@@ -4821,7 +4821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384030500809792}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4851,7 +4851,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384030590374962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RIght_Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4881,7 +4881,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384030599956534}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4911,7 +4911,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384030655803354}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4943,7 +4943,7 @@ GameObject:
   - component: {fileID: 6411384030692504704}
   - component: {fileID: 6411384030692504718}
   - component: {fileID: 6411384030692504719}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5002,7 +5002,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1779386283
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: -5890994262044595191, guid: a2f07a213877634458fcb9aa5f1bf6b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5048,7 +5048,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384030716338392}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right_Lower_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5078,7 +5078,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384030775191278}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right_Lower_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5109,7 +5109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384030932659665}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5144,7 +5144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031084105681}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left_Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5174,7 +5174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031123194354}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5205,7 +5205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031126068566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left_Upper_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5236,7 +5236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031262810992}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5269,7 +5269,7 @@ GameObject:
   - component: {fileID: 6411384031321289121}
   - component: {fileID: 6411384031321289135}
   - component: {fileID: 6411384031321289120}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5328,7 +5328,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1779386283
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 7
   m_Sprite: {fileID: -370247362243449026, guid: a2f07a213877634458fcb9aa5f1bf6b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5372,7 +5372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031424009288}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right_Upper_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5405,7 +5405,7 @@ GameObject:
   - component: {fileID: 6411384031448953230}
   - component: {fileID: 6411384031448953228}
   - component: {fileID: 6411384031448953229}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Leg_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5464,7 +5464,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1779386283
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -3443918373610522098, guid: a2f07a213877634458fcb9aa5f1bf6b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5511,7 +5511,7 @@ GameObject:
   - component: {fileID: 6411384031581886828}
   - component: {fileID: 6411384031581886826}
   - component: {fileID: 6411384031581886827}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5570,7 +5570,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1779386283
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 6
   m_Sprite: {fileID: 8052216107537035879, guid: a2f07a213877634458fcb9aa5f1bf6b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5621,7 +5621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031619612865}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5654,7 +5654,7 @@ GameObject:
   - component: {fileID: 6411384031691057284}
   - component: {fileID: 6411384031691057282}
   - component: {fileID: 6411384031691057283}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Arm_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5713,7 +5713,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1779386283
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 4
   m_Sprite: {fileID: 1151164444725644035, guid: a2f07a213877634458fcb9aa5f1bf6b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5757,7 +5757,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031833555175}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left_Lower_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5788,7 +5788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031896239324}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5823,7 +5823,7 @@ GameObject:
   - component: {fileID: 6411384031899594726}
   - component: {fileID: 6411384031899594724}
   - component: {fileID: 6411384031899594725}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Arm_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5882,7 +5882,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1779386283
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_Sprite: {fileID: -7802436842212896242, guid: a2f07a213877634458fcb9aa5f1bf6b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5926,7 +5926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384031915315129}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5958,7 +5958,7 @@ GameObject:
   - component: {fileID: 6411384031951644461}
   - component: {fileID: 6411384031951644459}
   - component: {fileID: 6411384031951644460}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Leg_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6017,7 +6017,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1779386283
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 8112330725737653297, guid: a2f07a213877634458fcb9aa5f1bf6b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6061,7 +6061,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384032090741144}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Upper_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6097,9 +6097,9 @@ GameObject:
   - component: {fileID: 6411384032124844858}
   - component: {fileID: 6411384032124844859}
   - component: {fileID: 6411384031451838649}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6243,7 +6243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384032156286364}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left_Upper_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6274,7 +6274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384032235892683}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lower_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6307,7 +6307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384032265415961}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6338,7 +6338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384032301718084}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left_Lower_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6368,7 +6368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384032431750189}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right_Upper_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6399,7 +6399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411384032502388335}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}

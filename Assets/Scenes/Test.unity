@@ -399,10 +399,9 @@ GameObject:
   - component: {fileID: 47146051}
   - component: {fileID: 47146050}
   - component: {fileID: 47146049}
-  - component: {fileID: 47146052}
   - component: {fileID: 47146053}
   - component: {fileID: 47146054}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -424,7 +423,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.64
+  m_Radius: 0.6
 --- !u!212 &47146050
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -486,26 +485,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 29.54, y: 3.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1557701472}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &47146052
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 47146048}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 10
 --- !u!114 &47146053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3441,6 +3425,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6411384030803462515, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
   m_PrefabInstance: {fileID: 6411384031451838647}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1557701471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1557701472}
+  - component: {fileID: 1557701473}
+  m_Layer: 0
+  m_Name: PlayerDetectionAura
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1557701472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557701471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 47146051}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1557701473
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557701471}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10
 --- !u!1 &1570775944
 GameObject:
   m_ObjectHideFlags: 0
@@ -4867,10 +4898,6 @@ PrefabInstance:
       objectReference: {fileID: 1754952545}
     - target: {fileID: 6411384032124844860, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6411384032124844860, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
