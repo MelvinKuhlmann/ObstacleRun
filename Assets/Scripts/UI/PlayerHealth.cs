@@ -19,27 +19,27 @@ public class PlayerHealth : MonoBehaviour
             health = maxHealth;
         }
 
-        for (int i = 0; i < healthIcons.Length; i++)
+        for (int currentHealthIcon = 0; currentHealthIcon < healthIcons.Length; currentHealthIcon++)
         {
-            if (i == Math.Floor(health) && i < Math.Ceiling(health))
+            if (currentHealthIcon == Math.Floor(health) && currentHealthIcon < Math.Ceiling(health))
             {
-                healthIcons[i].sprite = halfIcon;
+                healthIcons[currentHealthIcon].sprite = halfIcon;
             } 
-            else if (i < Math.Floor(health))
+            else if (currentHealthIcon < Math.Floor(health))
             {
-                healthIcons[i].sprite = fullIcon;
+                healthIcons[currentHealthIcon].sprite = fullIcon;
             }
             else
             {
-                healthIcons[i].sprite = emptyIcon;
+                healthIcons[currentHealthIcon].sprite = emptyIcon;
             }
 
-            if (i < maxHealth)
+            if (currentHealthIcon < maxHealth)
             {
-                healthIcons[i].enabled = true;
+                healthIcons[currentHealthIcon].enabled = true;
             } else
             {
-                healthIcons[i].enabled = false;
+                healthIcons[currentHealthIcon].enabled = false;
             }
         }
     }
