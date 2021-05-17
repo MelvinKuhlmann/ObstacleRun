@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4597022}
   m_Layer: 0
   m_Name: rope start
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 35786384}
   m_Layer: 0
   m_Name: rope (7)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 210132315}
   m_Layer: 0
   m_Name: Jump on
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 439379861}
   m_Layer: 0
   m_Name: rope (12)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1127,7 +1127,7 @@ GameObject:
   - component: {fileID: 481539274}
   m_Layer: 0
   m_Name: ball
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1273,7 +1273,7 @@ GameObject:
   - component: {fileID: 528488416}
   m_Layer: 0
   m_Name: rope
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1548,7 +1548,7 @@ GameObject:
   - component: {fileID: 750415775}
   m_Layer: 0
   m_Name: rope (6)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1694,7 +1694,7 @@ GameObject:
   - component: {fileID: 771116433}
   m_Layer: 0
   m_Name: rope (5)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1840,7 +1840,7 @@ GameObject:
   - component: {fileID: 875253731}
   m_Layer: 0
   m_Name: rope (13)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1986,7 +1986,7 @@ GameObject:
   - component: {fileID: 946487443}
   m_Layer: 0
   m_Name: rope (11)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2437,7 +2437,7 @@ GameObject:
   - component: {fileID: 1172394564}
   m_Layer: 0
   m_Name: rope (10)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2583,7 +2583,7 @@ GameObject:
   - component: {fileID: 1243704157}
   m_Layer: 0
   m_Name: rope (2)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2729,7 +2729,7 @@ GameObject:
   - component: {fileID: 1276767939}
   m_Layer: 0
   m_Name: rope (4)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2875,7 +2875,7 @@ GameObject:
   - component: {fileID: 1296754177}
   m_Layer: 0
   m_Name: rope (8)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3419,7 +3419,7 @@ GameObject:
   - component: {fileID: 1570775946}
   m_Layer: 0
   m_Name: rope end
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3651,7 +3651,7 @@ GameObject:
   - component: {fileID: 1707655880}
   m_Layer: 0
   m_Name: Jump on (1)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3929,7 +3929,7 @@ GameObject:
   - component: {fileID: 1823353346}
   m_Layer: 0
   m_Name: level_0
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4252,7 +4252,7 @@ GameObject:
   - component: {fileID: 2013990904}
   m_Layer: 0
   m_Name: rope (1)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4398,7 +4398,7 @@ GameObject:
   - component: {fileID: 2075050080}
   m_Layer: 0
   m_Name: rope (9)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4619,7 +4619,7 @@ GameObject:
   - component: {fileID: 2140559563}
   m_Layer: 0
   m_Name: rope (3)
-  m_TagString: FLOOR
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
