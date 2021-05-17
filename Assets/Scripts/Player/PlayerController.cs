@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rigidBody;
     private float jumpIn;
+    private float horizontal;
+    private float vertical;
 
     public float jumpFrequency = 0.7F;
     public float moveSpeed = 10F;
@@ -19,6 +21,12 @@ public class PlayerController : MonoBehaviour
         verticalState = PlayerVerticalState.GROUNDED;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
+        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
     }
 
     void FixedUpdate()
@@ -34,18 +42,17 @@ public class PlayerController : MonoBehaviour
 
     private void HandleState()
     {
+        string animation = "";
+
         if (!PlayerIsInTheAir())
         {
             switch (horizontalState)
             {
                 case PlayerHorizontalState.IDLE:
-                    ChangeAnimation("idle");
+                    animation = horizontal == -1 ? "idle_left" : "idle_right";
                     break;
-                case PlayerHorizontalState.RUNNING_LEFT:
-                    ChangeAnimation("run");
-                    break;
-                case PlayerHorizontalState.RUNNING_RIGHT:
-                    ChangeAnimation("run");
+                case PlayerHorizontalState.RUNNING:
+                    animation = horizontal == -1 ? "run_left" : "run_right";
                     break;
                 default:
                     break;
@@ -57,14 +64,23 @@ public class PlayerController : MonoBehaviour
             switch (verticalState)
             {
                 case PlayerVerticalState.JUMPING:
-                    ChangeAnimation("jump");
+                    animation = horizontal == -1 ? "jump_left" : "jump_right";
                     break;
                 case PlayerVerticalState.FALLING:
-                    ChangeAnimation("fall");
+                    animation = horizontal == -1 ? "fall_left" : "fall_right";
                     break;
             }
         }
 
+        if (animation.Length != 0)
+        {
+            PlayAnimation(animation);
+        }
+    }
+
+    private void PlayAnimation(string animation)
+    {
+        animator.Play(animation);
     }
 
     private void HandleMovement()
@@ -102,36 +118,13 @@ public class PlayerController : MonoBehaviour
     private void HandleRightMovement()
     {
         transform.position += transform.right * (Time.deltaTime * moveSpeed);
-
-        // Onderstaande if-statement is om ervoor te zorgen dat de beruchte flip van de sprite er niet meer is.
-        if (horizontalState != PlayerHorizontalState.RUNNING_RIGHT)
-        {
-            animator.Play("idle_right");
-        }
-
-        horizontalState = PlayerHorizontalState.RUNNING_RIGHT;
+        horizontalState = PlayerHorizontalState.RUNNING;
     }
 
     private void HandleLeftMovement()
     {
         transform.position -= transform.right * (Time.deltaTime * moveSpeed);
-
-        // Onderstaande if-statement is om ervoor te zorgen dat de beruchte flip van de sprite er niet meer is.
-        if (horizontalState != PlayerHorizontalState.RUNNING_LEFT)
-        {
-            animator.Play("idle_left");
-        }
-
-        horizontalState = PlayerHorizontalState.RUNNING_LEFT;
-    }
-
-    public void ChangeAnimation(string animationFlag, bool resetAll = true)
-    {
-        if (resetAll)
-        {
-            ResetAnimationParameters();
-        }
-        animator.SetBool(animationFlag, true);
+        horizontalState = PlayerHorizontalState.RUNNING;
     }
 
     public void Fall()
@@ -142,19 +135,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ResetAnimationParameters()
-    {
-        foreach (AnimatorControllerParameter parameter in animator.parameters)
-        {
-            animator.SetBool(parameter.name, false);
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if ("FLOOR".Equals(other.gameObject.tag) && !verticalState.Equals(PlayerVerticalState.GROUNDED))
+        if (other.gameObject.CompareTag("FLOOR") && !verticalState.Equals(PlayerVerticalState.GROUNDED))
         {
-            ChangeAnimation("idle");
             CreateDust();
             verticalState = PlayerVerticalState.GROUNDED;
         }
