@@ -19,10 +19,10 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Debug.Log("hit");
         if (health <= 0)
         {
             Debug.Log("DIEEE");
+            Destroy(this.gameObject);
         }
     }
 
