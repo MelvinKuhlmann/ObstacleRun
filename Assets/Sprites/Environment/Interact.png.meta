@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: f8e1959968f9399459d47749e5e9a38d
+guid: fea1271ee11ecc6469e916246a7c1a6b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7433124376718983041
-    second: stonewall_0
+      213: 5682281752145333396
+    second: Interact_0
   - first:
-      213: 735537038892897324
-    second: stonewall_1
-  - first:
-      213: 5985071891250466310
-    second: stonewall_2
-  - first:
-      213: 8167737180773825197
-    second: stonewall_3
+      213: 6828575121188932713
+    second: Interact_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -55,7 +49,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -75,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -87,7 +81,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -99,7 +93,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
-    maxTextureSize: 1024
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -111,7 +105,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 1024
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -125,55 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: stonewall_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 300
-        width: 300
-        height: 300
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18fb1adfc33c72760800000000000000
-      internalID: 7433124376718983041
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stonewall_1
-      rect:
-        serializedVersion: 2
-        x: 300
-        y: 300
-        width: 300
-        height: 300
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c249a523a07253a00800000000000000
-      internalID: 735537038892897324
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stonewall_2
+      name: Interact_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 300
-        height: 300
+        width: 98
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60ec821cc2f3f0350800000000000000
-      internalID: 5985071891250466310
+      spriteID: 49c8e46c5258bde40800000000000000
+      internalID: 5682281752145333396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stonewall_3
+      name: Interact_1
       rect:
         serializedVersion: 2
-        x: 300
+        x: 98
         y: 0
-        width: 300
-        height: 300
+        width: 98
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: daa36cef0b1a95170800000000000000
-      internalID: 8167737180773825197
+      spriteID: 96c4984b4e8f3ce50800000000000000
+      internalID: 6828575121188932713
       vertices: []
       indices: 
       edges: []

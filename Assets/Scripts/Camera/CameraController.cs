@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     public Vector3 offset = new Vector3(0, 6, -1); // Standaard waarden, kunnen we later nog tweaken.
 
     [Header("Level Boundaries")] //TODO maybe move this to a LevelManager to prevents the values being overwritten when it is a in a prefab
+    public bool enableCameraBoundaries = true;
     [SerializeField]
     float leftLimit;
     [SerializeField]
@@ -40,17 +41,24 @@ public class CameraController : MonoBehaviour
         // smoothly move the camera towards the player position
         transform.position = Vector3.Lerp(startPos, endPos, smoothSpeed);
 
-        // make sure the camera stays in the boundaries
-        transform.position = new Vector3
-        (
-            Mathf.Clamp(transform.position.x, leftLimit + cameraHalfWidth, rightLimit - cameraHalfWidth),
-            Mathf.Clamp(transform.position.y, bottomLimit + cameraHalfHeight, topLimit - cameraHalfHeight),
-            transform.position.z
-        );
+        if (enableCameraBoundaries)
+        {
+            // make sure the camera stays in the boundaries
+            transform.position = new Vector3
+            (
+                Mathf.Clamp(transform.position.x, leftLimit + cameraHalfWidth, rightLimit - cameraHalfWidth),
+                Mathf.Clamp(transform.position.y, bottomLimit + cameraHalfHeight, topLimit - cameraHalfHeight),
+                transform.position.z
+            );
+        }
     }
 
     private void OnDrawGizmos()
     {
+        if (!enableCameraBoundaries) 
+        { 
+            return;
+        }
         // draw a box around the camera boundaries
         Gizmos.color = Color.red;
         // top

@@ -4825,7 +4825,7 @@ GameObject:
   - component: {fileID: 1922215187}
   - component: {fileID: 4452360461850166680}
   m_Layer: 11
-  m_Name: GameObject
+  m_Name: Katana
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
