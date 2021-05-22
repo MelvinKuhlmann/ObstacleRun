@@ -72,6 +72,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (PlayerHorizontalState.ATTACK_SLASH == horizontalState)
+        {
+            animation = horizontal == -1 ? "attack_down_slash_right" : "attack_down_slash_right";
+        }
+
         if (animation.Length != 0)
         {
             PlayAnimation(animation);
@@ -113,6 +118,10 @@ public class PlayerController : MonoBehaviour
         {
             horizontalState = PlayerHorizontalState.IDLE;
         }
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            HandleAttack();
+        }
     }
 
     private void HandleRightMovement()
@@ -125,6 +134,11 @@ public class PlayerController : MonoBehaviour
     {
         transform.position -= transform.right * (Time.deltaTime * moveSpeed);
         horizontalState = PlayerHorizontalState.RUNNING;
+    }
+
+    private void HandleAttack()
+    {
+        horizontalState = PlayerHorizontalState.ATTACK_SLASH;
     }
 
     public void Fall()

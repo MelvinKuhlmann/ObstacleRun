@@ -2,5 +2,6 @@
 {
     Floor,
     Player,
-    Enemy
+    Enemy,
+    Weapon
 }

@@ -1,5 +1,6 @@
 ﻿public enum PlayerHorizontalState
 {
     RUNNING,
-    IDLE
+    IDLE,
+    ATTACK_SLASH
 }

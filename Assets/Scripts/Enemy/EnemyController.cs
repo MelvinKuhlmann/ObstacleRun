@@ -3,6 +3,7 @@
 public class EnemyController : MonoBehaviour
 {
     public float speed = 5F;
+    public int health = 3;
 
     private GameObject player;
     private bool followPlayer = false;
@@ -12,6 +13,16 @@ public class EnemyController : MonoBehaviour
         if (followPlayer)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log("hit");
+        if (health <= 0)
+        {
+            Debug.Log("DIEEE");
         }
     }
 
