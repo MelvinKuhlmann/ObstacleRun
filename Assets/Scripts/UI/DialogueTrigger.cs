@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
@@ -16,6 +14,11 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         manager.StartDialogue(dialogue);
+    }
+
+    public bool IsDialogueStarted()
+    {
+        return manager.IsDialogueStarted();
     }
 
     public void StopDialogue()

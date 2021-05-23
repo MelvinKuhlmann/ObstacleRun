@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public Animator animator;
 
     private Queue<string> sentences;
+    private bool isStarted;
 
     #region Singleton
     public static DialogueManager instance;
@@ -28,10 +29,17 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
+        isStarted = false;
+    }
+
+    public bool IsDialogueStarted()
+    {
+        return isStarted;
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        isStarted = true;
         animator.SetBool("IsOpen", true);
         nameText.text = dialogue.name;
         sentences.Clear();
@@ -50,7 +58,6 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         string sentence = sentences.Dequeue();
-        //  dialogueText.text = sentence;
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
@@ -67,7 +74,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-
         animator.SetBool("IsOpen", false);
+        isStarted = false;
     }
 }

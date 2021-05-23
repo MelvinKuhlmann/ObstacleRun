@@ -130,13 +130,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7401383401416540969, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
-      propertyPath: m_Icon
-      value: 
+    - target: {fileID: 7401383401416540968, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
+      propertyPath: label
+      value: Interact (X)
       objectReference: {fileID: 0}
     - target: {fileID: 7401383401416540969, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
       propertyPath: m_Name
       value: Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401383401416540971, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
+      propertyPath: dialogue.name
+      value: Mysterious Mark
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401383401416540971, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: See those orange walls?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401383401416540971, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: You can destroy them to  create your own path.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401383401416540971, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: Just press left CTRL and smash those walls!
       objectReference: {fileID: 0}
     - target: {fileID: 7401383401416540972, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
       propertyPath: m_RootOrder
@@ -144,11 +160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7401383401416540972, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.089241
+      value: -8.61
       objectReference: {fileID: 0}
     - target: {fileID: 7401383401416540972, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.443537
+      value: 0.61
       objectReference: {fileID: 0}
     - target: {fileID: 7401383401416540972, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
       propertyPath: m_LocalPosition.z
@@ -181,22 +197,6 @@ PrefabInstance:
     - target: {fileID: 7401383401416540972, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7401383401416540973, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
-      propertyPath: m_Size.x
-      value: 0.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 7401383401416540973, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
-      propertyPath: m_Size.y
-      value: 0.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 7401383401416540973, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 5682281752145333396, guid: fea1271ee11ecc6469e916246a7c1a6b, type: 3}
-    - target: {fileID: 7401383401416540973, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63c8b6f827ecf5a468550c4c9927cc95, type: 3}
