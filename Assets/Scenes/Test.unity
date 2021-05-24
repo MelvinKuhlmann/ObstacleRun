@@ -558,30 +558,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &385102228 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5110765215178267354, guid: f66b21f4dacff8042a85c0cb0dd177d3, type: 3}
-  m_PrefabInstance: {fileID: 5110765214889651022}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &385102229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385102228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3412665ee62604ca886df5e1d9de6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inGameMenu: {fileID: 1489065901}
 --- !u!114 &385102230 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5110765215178267352, guid: f66b21f4dacff8042a85c0cb0dd177d3, type: 3}
   m_PrefabInstance: {fileID: 5110765214889651022}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385102228}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ace0c1017b193849bc2f334b99aa198, type: 3}
@@ -87562,6 +87544,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 385102229, guid: f66b21f4dacff8042a85c0cb0dd177d3, type: 3}
+      propertyPath: inGameMenu
+      value: 
+      objectReference: {fileID: 1489065901}
     - target: {fileID: 5110765215178267350, guid: f66b21f4dacff8042a85c0cb0dd177d3, type: 3}
       propertyPath: soulsLabel
       value: 
