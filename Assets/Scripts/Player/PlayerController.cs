@@ -10,10 +10,15 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private float vertical;
 
+    public ParticleSystem dust;
+    [Header("Player Movement")]
     public float jumpFrequency = 0.7F;
     public float moveSpeed = 10F;
     public float jumpHeight = 25F;
-    public ParticleSystem dust;
+    public float dashSpeed;
+
+    private float dashTime;
+    public float startDashTime;
     
     void Start()
     {
@@ -21,6 +26,8 @@ public class PlayerController : MonoBehaviour
         verticalState = PlayerVerticalState.GROUNDED;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
+
+        dashTime = startDashTime;
     }
 
     private void Update()
@@ -121,6 +128,34 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             HandleAttack();
+        }
+
+        if (Input.GetKeyUp(KeyCode.A)) // TODO change it to double LeftArrow
+        {
+            if (dashTime <= 0)
+            {
+                dashTime = startDashTime;
+                rigidBody.velocity = Vector2.zero;
+            }
+            else
+            {
+                CreateDust();
+                dashTime -= Time.deltaTime;
+                rigidBody.velocity = Vector2.left * dashSpeed;
+            }
+        } else if(Input.GetKeyUp(KeyCode.D)) // TODO change it to double RightArrow
+        {
+            if (dashTime <= 0)
+            {
+                dashTime = startDashTime;
+                rigidBody.velocity = Vector2.zero;
+            }
+            else
+            {
+                CreateDust();
+                dashTime -= Time.deltaTime;
+                rigidBody.velocity = Vector2.right * dashSpeed;
+            }
         }
     }
 

@@ -85440,14 +85440,6 @@ PrefabInstance:
       propertyPath: healthIcons.Array.data[6]
       value: 
       objectReference: {fileID: 1754952545}
-    - target: {fileID: 6411384032124844856, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
-      propertyPath: m_Size.y
-      value: 2.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 6411384032124844856, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
-      propertyPath: m_Offset.y
-      value: 1.45
-      objectReference: {fileID: 0}
     - target: {fileID: 6411384032124844860, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
       propertyPath: m_Name
       value: Player
