@@ -12,7 +12,6 @@ public class DestroyableDoor : MonoBehaviour
             endurance -= 1;
             if (endurance <= 0)
             {
-                GameManager.instance.AddDoorsDestroyed();
                 Destroy(this.gameObject);
             }
         }

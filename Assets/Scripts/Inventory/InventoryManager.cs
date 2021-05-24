@@ -6,7 +6,7 @@ public class InventoryManager : MonoBehaviour
     public int numberOfSoulsCollected = 0;
     public TMP_Text soulsLabel;
     public TMP_Text soulsAddedLabel;
-    public float addedLabelDuration = 3f;
+    private float addedLabelDuration = 3f;
     private float addedTime;
 
     #region Singleton

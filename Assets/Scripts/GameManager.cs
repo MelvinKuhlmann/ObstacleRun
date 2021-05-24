@@ -1,28 +1,47 @@
 ﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public enum GameState { MAIN_MENU, LEVEL_SELECT, PAUSED, GAME }
+public class GameManager
 {
-    private int doorsDestroyed = 0;
+    public GameState gameState { get; private set; }
 
     #region Singleton
-    public static GameManager instance;
+    private static GameManager instance;
 
-    private void Awake()
+    public static GameManager Instance
     {
-        if (instance != null)
+        get
         {
-            return;
+            if (instance == null)
+            {
+                instance = new GameManager();
+            }
+            return instance;
         }
-
-        instance = this;
     }
     #endregion
 
-
-    public void AddDoorsDestroyed()
+    public void SetGameState(GameState state)
     {
-        doorsDestroyed++;
-        Debug.Log("Doors destroyed total: " + doorsDestroyed);
+        gameState = state;
+        if (gameState == GameState.PAUSED)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 
+    public void Pause(bool paused)
+    {
+        if (paused)
+        {
+            SetGameState(GameState.PAUSED);
+        } else
+        {
+            SetGameState(GameState.GAME);
+        }
+    }
 }
