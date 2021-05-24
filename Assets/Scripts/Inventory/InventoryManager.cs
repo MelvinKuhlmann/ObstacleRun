@@ -30,7 +30,6 @@ public class InventoryManager : MonoBehaviour
     {
         if (addedTime <= 0)
         {
-            addedTime = addedLabelDuration;
             soulsAddedLabel.enabled = false;
         }
         else
@@ -45,6 +44,7 @@ public class InventoryManager : MonoBehaviour
         soulsLabel.text = numberOfSoulsCollected.ToString();
         soulsAddedLabel.text = "+" + numberOfSouls;
         soulsAddedLabel.enabled = true;
+        addedTime = addedLabelDuration;
     }
 
     public int GetCurrentSouls()
