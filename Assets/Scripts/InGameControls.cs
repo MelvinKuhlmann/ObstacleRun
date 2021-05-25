@@ -83,6 +83,7 @@ public class InGameControls : MonoBehaviour
 
     private void HandleMenuStuff()
     {
+        // Needs to be in the Update and not FixedUpdate because Game ScaleTime is set to 0 when paused, FixedUpdate is not triggered at that time
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             menuIsActive = !menuIsActive;
