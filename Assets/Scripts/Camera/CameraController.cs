@@ -20,10 +20,34 @@ public class CameraController : MonoBehaviour
     private float cameraHalfWidth;
     private float cameraHalfHeight;
 
+    [Header("Shake Params")]
+    public float shakeDuration = .4f;
+    public float shakeDirection = 1f;
+    public float shakeSpeed = 2f;
+    private float startShakeDuration;
+    private int shakeOrientation = 1; // 1 horizontal, -1 vertical
+    private bool shakeEffect = false;
+
+    #region Singleton
+    public static CameraController instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
     private void Start()
     {
         cameraHalfHeight = Camera.main.orthographicSize;
         cameraHalfWidth = cameraHalfHeight * Camera.main.aspect;
+        startShakeDuration = shakeDuration;
+
     }
 
     private void FixedUpdate()
@@ -51,6 +75,36 @@ public class CameraController : MonoBehaviour
                 transform.position.z
             );
         }
+        HandleEffects();
+    }
+
+    private void HandleEffects()
+    {
+        if (shakeEffect)
+        {
+            transform.position = new Vector3(
+                shakeOrientation == 1 ? transform.position.x + (shakeDirection * shakeSpeed) : transform.position.x,
+                shakeOrientation == -1 ? transform.position.y + (shakeDirection * shakeSpeed) : transform.position.y,
+                transform.position.z
+            );
+            shakeDirection *= -1.0f;
+
+            if (startShakeDuration <= 0)
+            {
+                shakeEffect = false;
+            }
+            else
+            {
+                startShakeDuration -= Time.deltaTime;
+            }
+        }
+    }
+
+    public void Shake(int shakeOrientation)
+    {
+        this.shakeOrientation = shakeOrientation;
+        startShakeDuration = shakeDuration;
+        shakeEffect = true;
     }
 
     private void OnDrawGizmos()

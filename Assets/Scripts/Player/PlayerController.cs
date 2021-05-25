@@ -139,6 +139,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                CameraController.instance.Shake(1);
                 CreateDust();
                 dashTime -= Time.deltaTime;
                 rigidBody.velocity = Vector2.left * dashSpeed;
@@ -152,6 +153,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                CameraController.instance.Shake(1);
                 CreateDust();
                 dashTime -= Time.deltaTime;
                 rigidBody.velocity = Vector2.right * dashSpeed;
@@ -189,6 +191,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag(Tags.Floor.ToString()) && !verticalState.Equals(PlayerVerticalState.GROUNDED))
         {
             CreateDust();
+            CameraController.instance.Shake(-1);
             verticalState = PlayerVerticalState.GROUNDED;
         }
     }

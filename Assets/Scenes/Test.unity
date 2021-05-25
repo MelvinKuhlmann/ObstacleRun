@@ -86139,6 +86139,9 @@ MonoBehaviour:
   rightLimit: 106.43
   topLimit: 63.7
   bottomLimit: -3.71
+  shakeDuration: 0.1
+  shakeDirection: 1
+  shakeSpeed: 2
 --- !u!114 &1580961005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87754,6 +87757,14 @@ PrefabInstance:
       propertyPath: healthIcons.Array.data[6]
       value: 
       objectReference: {fileID: 1754952545}
+    - target: {fileID: 6411384032124844859, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: camDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6411384032124844859, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: camMagnitude
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6411384032124844860, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
       propertyPath: m_Name
       value: Player
