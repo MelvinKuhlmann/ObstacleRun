@@ -87604,7 +87604,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 385102229, guid: f66b21f4dacff8042a85c0cb0dd177d3, type: 3}
+    - target: {fileID: 1776242728, guid: f66b21f4dacff8042a85c0cb0dd177d3, type: 3}
       propertyPath: inGameMenu
       value: 
       objectReference: {fileID: 1489065901}

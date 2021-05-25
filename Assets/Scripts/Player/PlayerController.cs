@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleMovement();
         HandleState();
     }
 
@@ -95,9 +94,9 @@ public class PlayerController : MonoBehaviour
         animator.Play(animation);
     }
 
-    private void HandleMovement()
+    public void HandleJump()
     {
-        if (Input.GetKey(KeyCode.Space) && !PlayerIsInTheAir())
+        if (!PlayerIsInTheAir())
         {
             if (jumpIn < 0)
             {
@@ -106,74 +105,58 @@ public class PlayerController : MonoBehaviour
                 verticalState = PlayerVerticalState.JUMPING;
             }
         }
+    }
 
-        // Een fail-safe om ervoor te zorgen dat er geen rare dingen gebeuren als men links en rechts tegelijk indrukt.
-        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
-        {
-            return;
-        }
+    public void HandleIdle()
+    {
+        horizontalState = PlayerHorizontalState.IDLE;
+    }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+    public void HandleLeftDash()
+    {
+        if (dashTime <= 0)
         {
-            HandleRightMovement();
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            HandleLeftMovement();
+            dashTime = startDashTime;
+            rigidBody.velocity = Vector2.zero;
         }
         else
         {
-            horizontalState = PlayerHorizontalState.IDLE;
-        }
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            HandleAttack();
-        }
-
-        if (Input.GetKeyUp(KeyCode.A)) // TODO change it to double LeftArrow
-        {
-            if (dashTime <= 0)
-            {
-                dashTime = startDashTime;
-                rigidBody.velocity = Vector2.zero;
-            }
-            else
-            {
-                CameraController.instance.Shake(1);
-                CreateDust();
-                dashTime -= Time.deltaTime;
-                rigidBody.velocity = Vector2.left * dashSpeed;
-            }
-        } else if(Input.GetKeyUp(KeyCode.D)) // TODO change it to double RightArrow
-        {
-            if (dashTime <= 0)
-            {
-                dashTime = startDashTime;
-                rigidBody.velocity = Vector2.zero;
-            }
-            else
-            {
-                CameraController.instance.Shake(1);
-                CreateDust();
-                dashTime -= Time.deltaTime;
-                rigidBody.velocity = Vector2.right * dashSpeed;
-            }
+            CameraController.instance.Shake(1);
+            CreateDust();
+            dashTime -= Time.deltaTime;
+            rigidBody.velocity = Vector2.left * dashSpeed;
         }
     }
 
-    private void HandleRightMovement()
+    public void HandleRightDash()
+    {
+        if (dashTime <= 0)
+        {
+            dashTime = startDashTime;
+            rigidBody.velocity = Vector2.zero;
+        }
+        else
+        {
+            CameraController.instance.Shake(1);
+            CreateDust();
+            dashTime -= Time.deltaTime;
+            rigidBody.velocity = Vector2.right * dashSpeed;
+        }
+    }
+
+    public void HandleRightMovement()
     {
         transform.position += transform.right * (Time.deltaTime * moveSpeed);
         horizontalState = PlayerHorizontalState.RUNNING;
     }
 
-    private void HandleLeftMovement()
+    public void HandleLeftMovement()
     {
         transform.position -= transform.right * (Time.deltaTime * moveSpeed);
         horizontalState = PlayerHorizontalState.RUNNING;
     }
 
-    private void HandleAttack()
+    public void HandleAttack()
     {
         horizontalState = PlayerHorizontalState.ATTACK_SLASH;
     }

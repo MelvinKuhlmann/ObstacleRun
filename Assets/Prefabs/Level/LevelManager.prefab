@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5110765215178267351}
   - component: {fileID: 5110765215178267352}
   - component: {fileID: 5110765215178267350}
-  - component: {fileID: 385102229}
+  - component: {fileID: 1776242728}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -63,7 +63,7 @@ MonoBehaviour:
   numberOfSoulsCollected: 0
   soulsLabel: {fileID: 0}
   soulsAddedLabel: {fileID: 0}
---- !u!114 &385102229
+--- !u!114 &1776242728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +72,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5110765215178267354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3412665ee62604ca886df5e1d9de6c, type: 3}
+  m_Script: {fileID: 11500000, guid: c2ff96b69b4c038429a1311491702c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inGameMenu: {fileID: 0}
+  doubleTapTime: 0.25
