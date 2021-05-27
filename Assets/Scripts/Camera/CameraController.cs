@@ -2,7 +2,6 @@
 
 public class CameraController : MonoBehaviour
 {
-    public Transform player;
     public float smoothSpeed = 0.125F; 
     public Vector3 offset = new Vector3(0, 6, -1); // Standaard waarden, kunnen we later nog tweaken.
 
@@ -17,6 +16,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     float bottomLimit;
 
+    private PlayerController player;
     private float cameraHalfWidth;
     private float cameraHalfHeight;
 
@@ -50,10 +50,13 @@ public class CameraController : MonoBehaviour
         cameraHalfHeight = Camera.main.orthographicSize;
         cameraHalfWidth = cameraHalfHeight * Camera.main.aspect;
         startShakeDuration = shakeDuration;
+        player = PlayerController.instance;
     }
 
     private void FixedUpdate()
     {
+        if (!player) return;
+
         // camera current position
         Vector3 startPos = transform.position;
 

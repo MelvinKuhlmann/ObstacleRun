@@ -4,8 +4,17 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-    private static string playerDataPath = Application.persistentDataPath + "/player.fun";
-    private static string inventoryDataPath = Application.persistentDataPath + "/inventory.fun";
+    #region SaveDataPaths
+    private static string GetPlayerDataPath()
+    {
+        return Path.Combine(Application.persistentDataPath, "player.fun");
+    }
+
+    private static string GetInventoryDataPath()
+    {
+        return Path.Combine(Application.persistentDataPath, "inventory.fun");
+    }
+    #endregion
 
     #region PlayerData
     public static void SavePlayer(PlayerController player)
@@ -14,7 +23,7 @@ public static class SaveSystem
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            stream = new FileStream(playerDataPath, FileMode.Create);
+            stream = new FileStream(GetPlayerDataPath(), FileMode.Create);
 
             PlayerData data = new PlayerData(player);
 
@@ -31,9 +40,9 @@ public static class SaveSystem
 
     public static PlayerData LoadPlayer()
     {
-        if (!File.Exists(playerDataPath))
+        if (!File.Exists(GetPlayerDataPath()))
         {
-            Debug.LogError("Save file not found in " + playerDataPath);
+            Debug.LogError("Save file not found in " + GetPlayerDataPath());
             return null;
         }
 
@@ -42,7 +51,7 @@ public static class SaveSystem
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            stream = new FileStream(playerDataPath, FileMode.Open);
+            stream = new FileStream(GetPlayerDataPath(), FileMode.Open);
             data = formatter.Deserialize(stream) as PlayerData;
         }
         finally
@@ -63,7 +72,7 @@ public static class SaveSystem
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            stream = new FileStream(inventoryDataPath, FileMode.Create);
+            stream = new FileStream(GetInventoryDataPath(), FileMode.Create);
 
             InventoryData data = new InventoryData(inventory);
 
@@ -80,9 +89,9 @@ public static class SaveSystem
 
     public static InventoryData LoadInventory()
     {
-        if (!File.Exists(inventoryDataPath))
+        if (!File.Exists(GetInventoryDataPath()))
         {
-            Debug.LogError("Save file not found in " + inventoryDataPath);
+            Debug.LogError("Save file not found in " + GetInventoryDataPath());
             return null;
         }
 
@@ -91,7 +100,7 @@ public static class SaveSystem
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            stream = new FileStream(inventoryDataPath, FileMode.Open);
+            stream = new FileStream(GetInventoryDataPath(), FileMode.Open);
             data = formatter.Deserialize(stream) as InventoryData;
         }
         finally
