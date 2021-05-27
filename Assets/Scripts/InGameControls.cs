@@ -2,8 +2,6 @@
 
 public class InGameControls : MonoBehaviour
 {
-    private PlayerController playerController;
-
     private bool menuIsActive = false;
     public GameObject inGameMenu;
 
@@ -13,7 +11,6 @@ public class InGameControls : MonoBehaviour
 
     private void Awake()
     {
-        playerController = FindObjectOfType<PlayerController>();
         inGameMenu.SetActive(menuIsActive);
     }
 
@@ -31,7 +28,7 @@ public class InGameControls : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            playerController.HandleJump();
+            PlayerController.instance.HandleJump();
         }
 
         if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
@@ -46,7 +43,7 @@ public class InGameControls : MonoBehaviour
 
             if (timeSinceLastTap <= doubleTapTime)
             {
-                playerController.HandleRightDash();
+                PlayerController.instance.HandleRightDash();
             }
             lastTapTimeRight = Time.time;
         }
@@ -58,26 +55,26 @@ public class InGameControls : MonoBehaviour
 
             if (timeSinceLastTap <= doubleTapTime)
             {
-                playerController.HandleLeftDash();
+                PlayerController.instance.HandleLeftDash();
             }
             lastTapTimeLeft = Time.time;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            playerController.HandleRightMovement();
+            PlayerController.instance.HandleRightMovement();
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            playerController.HandleLeftMovement();
+            PlayerController.instance.HandleLeftMovement();
         } else
         {
-            playerController.HandleIdle();
+            PlayerController.instance.HandleIdle();
         }
 
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            playerController.HandleAttack();
+            PlayerController.instance.HandleAttack();
         }
     }
 

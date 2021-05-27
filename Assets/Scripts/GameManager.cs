@@ -3,6 +3,7 @@
 public enum GameState { MAIN_MENU, LEVEL_SELECT, PAUSED, GAME }
 public class GameManager
 {
+    public string areaTransitionName;
     public GameState gameState { get; private set; }
 
     #region Singleton

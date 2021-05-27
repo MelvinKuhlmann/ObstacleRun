@@ -11,7 +11,12 @@ public class PlayerController : MonoBehaviour
     private float vertical;
 
     public ParticleSystem dust;
-    [Header("Player Movement")]
+
+    [Header("Health")]
+    public float health;
+    public int maxHealth;
+
+    [Header("Movement")]
     public float jumpFrequency = 0.7F;
     public float moveSpeed = 10F;
     public float jumpHeight = 25F;
@@ -19,7 +24,24 @@ public class PlayerController : MonoBehaviour
 
     private float dashTime;
     public float startDashTime;
-    
+
+    #region Singleton
+    public static PlayerController instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this);
+    }
+    #endregion
+
     void Start()
     {
         horizontalState = PlayerHorizontalState.IDLE;
@@ -174,7 +196,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag(Tags.Floor.ToString()) && !verticalState.Equals(PlayerVerticalState.GROUNDED))
         {
             CreateDust();
-            CameraController.instance.Shake(-1);
+//            CameraController.instance.Shake(-1);
             verticalState = PlayerVerticalState.GROUNDED;
         }
     }
@@ -197,5 +219,15 @@ public class PlayerController : MonoBehaviour
     private bool PlayerIsFalling()
     {
         return verticalState == PlayerVerticalState.FALLING;
+    }
+
+    public void GetDamage(float damage)
+    {
+        health -= damage;
+    }
+
+    public void ReceiveHealth(float healthReceived)
+    {
+        health += healthReceived;
     }
 }

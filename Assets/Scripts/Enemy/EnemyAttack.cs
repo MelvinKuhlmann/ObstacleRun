@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Tags.Player.ToString()))
         {
-            other.gameObject.GetComponent<PlayerHealth>().GetDamage(0.5F);
+            PlayerController.instance.GetDamage(0.5F);
         }
     }
 }

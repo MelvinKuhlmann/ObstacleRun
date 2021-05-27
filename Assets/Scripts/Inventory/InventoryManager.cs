@@ -14,6 +14,9 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
+
+        InventoryData data = SaveSystem.LoadInventory();
+        numberOfSoulsCollected = data.collectedSouls;
         if (instance != null)
         {
             return;
@@ -45,6 +48,7 @@ public class InventoryManager : MonoBehaviour
         soulsAddedLabel.text = "+" + numberOfSouls;
         soulsAddedLabel.enabled = true;
         addedTime = addedLabelDuration;
+        SaveSystem.SaveInventory(this);
     }
 
     public int GetCurrentSouls()
@@ -56,5 +60,6 @@ public class InventoryManager : MonoBehaviour
     {
         numberOfSoulsCollected -= numberOfSouls;
         soulsLabel.text = numberOfSoulsCollected.ToString();
+        SaveSystem.SaveInventory(this);
     }
 }

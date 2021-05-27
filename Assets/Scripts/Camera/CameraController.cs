@@ -33,12 +33,15 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance == null)
         {
-            return;
+            instance = this;
         }
-
-        instance = this;
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this);
     }
     #endregion
 
@@ -47,7 +50,6 @@ public class CameraController : MonoBehaviour
         cameraHalfHeight = Camera.main.orthographicSize;
         cameraHalfWidth = cameraHalfHeight * Camera.main.aspect;
         startShakeDuration = shakeDuration;
-
     }
 
     private void FixedUpdate()

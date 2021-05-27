@@ -6264,7 +6264,6 @@ GameObject:
   - component: {fileID: 6411384032124844857}
   - component: {fileID: 6411384032124844858}
   - component: {fileID: 6411384032124844859}
-  - component: {fileID: 6411384031451838649}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -6375,36 +6374,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dust: {fileID: 1172624323}
+  health: 2.5
+  maxHealth: 3
   jumpFrequency: 0
   moveSpeed: 10
   jumpHeight: 25
   dashSpeed: 200
   startDashTime: 0.2
---- !u!114 &6411384031451838649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6411384032124844860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f73d328a53b2dd48ac43fc5b725cf7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 2.5
-  maxHealth: 3
-  healthIcons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  fullIcon: {fileID: -8630923909508717717, guid: 2188afcdf3c85b843af9cc55a83a7b65, type: 3}
-  halfIcon: {fileID: 5407656843090688360, guid: 2188afcdf3c85b843af9cc55a83a7b65, type: 3}
-  emptyIcon: {fileID: 8097168318057207725, guid: 2188afcdf3c85b843af9cc55a83a7b65, type: 3}
 --- !u!1 &6411384032156286365
 GameObject:
   m_ObjectHideFlags: 0

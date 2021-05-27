@@ -4,9 +4,6 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health;
-    public int maxHealth;
-
     public Image[] healthIcons;
     public Sprite fullIcon;
     public Sprite halfIcon;
@@ -14,18 +11,18 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if (health > maxHealth)
+        if (PlayerController.instance.health > PlayerController.instance.maxHealth)
         {
-            health = maxHealth;
+            PlayerController.instance.health = PlayerController.instance.maxHealth;
         }
 
         for (int currentHealthIcon = 0; currentHealthIcon < healthIcons.Length; currentHealthIcon++)
         {
-            if (currentHealthIcon == Math.Floor(health) && currentHealthIcon < Math.Ceiling(health))
+            if (currentHealthIcon == Math.Floor(PlayerController.instance.health) && currentHealthIcon < Math.Ceiling(PlayerController.instance.health))
             {
                 healthIcons[currentHealthIcon].sprite = halfIcon;
             } 
-            else if (currentHealthIcon < Math.Floor(health))
+            else if (currentHealthIcon < Math.Floor(PlayerController.instance.health))
             {
                 healthIcons[currentHealthIcon].sprite = fullIcon;
             }
@@ -34,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
                 healthIcons[currentHealthIcon].sprite = emptyIcon;
             }
 
-            if (currentHealthIcon < maxHealth)
+            if (currentHealthIcon < PlayerController.instance.maxHealth)
             {
                 healthIcons[currentHealthIcon].enabled = true;
             } else
@@ -42,15 +39,5 @@ public class PlayerHealth : MonoBehaviour
                 healthIcons[currentHealthIcon].enabled = false;
             }
         }
-    }
-
-    public void GetDamage(float damage)
-    {
-        health -= damage;
-    }
-
-    public void ReceiveHealth(float healthReceived)
-    {
-        health += healthReceived;
     }
 }
