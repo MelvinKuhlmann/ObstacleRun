@@ -8,6 +8,7 @@ public class HealthSystem
     public const int MAX_FRAGMENT_AMOUNT = 4;
     public event EventHandler OnDamaged;
     public event EventHandler OnHealed;
+    public event EventHandler OnDead;
 
     private List<Health> healthList;
 
@@ -46,6 +47,11 @@ public class HealthSystem
             }
         }
         if (OnDamaged != null) OnDamaged(this, EventArgs.Empty);
+
+        if(IsDead())
+        {
+            if (OnDead != null) OnDead(this, EventArgs.Empty);
+        }
     }
 
     public void Heal(int healAmount)
@@ -70,6 +76,11 @@ public class HealthSystem
             }
         }
         if (OnHealed != null) OnHealed(this, EventArgs.Empty);
+    }
+
+    public bool IsDead()
+    {
+        return healthList[0].GetFragmentAmount() == 0;
     }
 
     // Represents a single heart

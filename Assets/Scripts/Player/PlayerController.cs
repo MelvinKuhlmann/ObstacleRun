@@ -224,10 +224,12 @@ public class PlayerController : MonoBehaviour
     public void GetDamage(float damage)
     {
         health -= damage;
+        HealthVisual.instance.healthSystem.Damage(2);
     }
 
     public void ReceiveHealth(float healthReceived)
     {
         health += healthReceived;
+        HealthVisual.instance.healthSystem.Heal(4);
     }
 }
