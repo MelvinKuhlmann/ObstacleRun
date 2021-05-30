@@ -11,9 +11,9 @@ public class UISkillTree : MonoBehaviour
         playerSkills = PlayerController.instance.GetPlayerSkills();
     }
 
-    public void UnLockEarthShatter()
+    public void UnLockDash()
     {
-        playerSkills.UnlockSkill(PlayerSkills.SkillType.EarthShatter);
+        playerSkills.UnlockSkill(PlayerSkills.SkillType.Dash);
     }
 
     public void UnLockMaxHealth1()

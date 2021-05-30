@@ -56,7 +56,11 @@ public class PlayerController : MonoBehaviour
                 // SetMovementSpeed(70f);
                 break;
             case PlayerSkills.SkillType.HealthMax_1:
-                maxHealth= 5;
+                maxHealth= 4;
+                HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+                break;
+            case PlayerSkills.SkillType.HealthMax_2:
+                maxHealth = 5;
                 HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
                 break;
         }
@@ -162,6 +166,10 @@ public class PlayerController : MonoBehaviour
 
     public void HandleLeftDash()
     {
+        if (!CanUseDash())
+        {
+            return;
+        }
         if (dashTime <= 0)
         {
             dashTime = startDashTime;
@@ -178,6 +186,10 @@ public class PlayerController : MonoBehaviour
 
     public void HandleRightDash()
     {
+        if (!CanUseDash())
+        {
+            return;
+        }
         if (dashTime <= 0)
         {
             dashTime = startDashTime;
@@ -261,5 +273,10 @@ public class PlayerController : MonoBehaviour
 
     public bool CanUseEarthShatter() {
         return playerSkills.IsSkillUnlocked(PlayerSkills.SkillType.EarthShatter);
+    }
+
+    public bool CanUseDash()
+    {
+        return playerSkills.IsSkillUnlocked(PlayerSkills.SkillType.Dash);
     }
 }

@@ -12,6 +12,7 @@ public class PlayerSkills
     }
 
     public enum SkillType {
+        Dash,
         EarthShatter,      
         MoveSpeed_1,
         MoveSpeed_2,
