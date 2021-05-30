@@ -2,44 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using CodeMonkey.Utils;
 
 public class UISkillTree : MonoBehaviour
 {
     private PlayerSkills playerSkills;
-    // https://www.youtube.com/watch?v=_OQTTKkwZQY 16:00 uses different sprites/material for player based on specific unlocked skills
+    private List<SkillButton> skillButtonList;
 
-    private void Start()
-    {
-        playerSkills = PlayerController.instance.GetPlayerSkills();
-    }
+    [SerializeField]
+    private Material skillLockedMaterial;
+    [SerializeField]
+    private Material skillUnlockableMaterial;
 
-    public void UnLockDash()
+    #region singleton
+    private static UISkillTree instance;
+    public static UISkillTree Instance { get { return instance; } }
+
+    private void Awake()
     {
-        if (!playerSkills.TryUnlockSkill(PlayerSkills.SkillType.Dash))
+        if (instance != null && instance != this)
         {
-            Debug.LogWarning("Cannot buy skill yet, requirements not met");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
         }
     }
-
-    public void UnLockMaxHealth1()
-    {
-        if (!playerSkills.TryUnlockSkill(PlayerSkills.SkillType.HealthMax_1))
-        {
-            Debug.LogWarning("Cannot buy skill yet, requirements not met");
-        }
-    }
-
-    public void UnLockMaxHealth2()
-    {
-        if (!playerSkills.TryUnlockSkill(PlayerSkills.SkillType.HealthMax_2))
-        {
-            Debug.LogWarning("Cannot buy skill yet, requirements not met");
-        }
-    }
+    #endregion
 
     public void SetPlayerSkills(PlayerSkills playerSkills)
     {
         this.playerSkills = playerSkills;
+
+        skillButtonList = new List<SkillButton>();
+        skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - MaxHealth 1"), playerSkills, PlayerSkills.SkillType.HealthMax_1, skillLockedMaterial, skillUnlockableMaterial));
+        skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - MaxHealth 2"), playerSkills, PlayerSkills.SkillType.HealthMax_2, skillLockedMaterial, skillUnlockableMaterial));
+        skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - Dash"), playerSkills, PlayerSkills.SkillType.Dash, skillLockedMaterial, skillUnlockableMaterial));
+
         playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
         UpdateVisuals();
     }
@@ -51,20 +51,65 @@ public class UISkillTree : MonoBehaviour
 
     private void UpdateVisuals()
     {
-        if (playerSkills.IsSkillUnlocked(PlayerSkills.SkillType.HealthMax_2))
+        foreach (SkillButton skillButton in skillButtonList)
         {
-            transform.Find("SkillBtn - MaxHealth 2").GetComponent<Button>().interactable = false;
-        }  else
-        {
-            if (playerSkills.CanUnlock(PlayerSkills.SkillType.HealthMax_2))
-            {
-                transform.Find("SkillBtn - MaxHealth 2").GetComponent<Button>().interactable = false;
-            } else
-            {
-                transform.Find("SkillBtn - MaxHealth 2").GetComponent<Button>().interactable = true;
-            }
+            skillButton.UpdateVisual();
         }
     }
 
-    // https://www.youtube.com/watch?v=_OQTTKkwZQY 18:10 ended
+    /*
+     * Represents a single Skill Button
+     */
+    private class SkillButton
+    {
+        private Transform transform;
+        private Image image;
+        private Image backgroundImage;
+        private PlayerSkills playerSkills;
+        private PlayerSkills.SkillType skillType;
+        private Material skillLockedMaterial;
+        private Material skillUnlockableMaterial;
+
+        public SkillButton(Transform transform, PlayerSkills playerSkills, PlayerSkills.SkillType skillType, Material skillLockedMaterial, Material skillUnlockableMaterial)
+        {
+            this.transform = transform;
+            this.playerSkills = playerSkills;
+            this.skillType = skillType;
+            this.skillLockedMaterial = skillLockedMaterial;
+            this.skillUnlockableMaterial = skillUnlockableMaterial;
+
+            image = transform.Find("Image").GetComponent<Image>();
+            backgroundImage = transform.Find("Background").GetComponent<Image>();
+
+            transform.GetComponent<Button_UI>().ClickFunc = () =>
+            {
+                if (!playerSkills.TryUnlockSkill(skillType))
+                {
+                    Debug.LogWarning("requiremnts not met");
+                }
+            };
+        }
+
+        public void UpdateVisual()
+        {
+            if (playerSkills.IsSkillUnlocked(skillType))
+            {
+                image.material = null;
+                backgroundImage.material = null;
+            }
+            else
+            {
+                if (playerSkills.CanUnlock(skillType))
+                {
+                   image.material = skillUnlockableMaterial;
+                   backgroundImage.material = skillUnlockableMaterial;
+                }
+                else
+                {
+                    image.material = skillLockedMaterial;
+                    backgroundImage.material = skillLockedMaterial;
+                }
+            }
+        }
+    }
 }

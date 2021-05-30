@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
             instance = this;
             playerSkills = new PlayerSkills();
             playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
+            UISkillTree.Instance.SetPlayerSkills(playerSkills);
         }
         else
         {
