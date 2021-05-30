@@ -4,6 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerHorizontalState horizontalState;
     private PlayerVerticalState verticalState;
+    private PlayerSkills playerSkills;
     private Animator animator;
     private Rigidbody2D rigidBody;
     private float jumpIn;
@@ -13,8 +14,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dust;
 
     [Header("Health")]
-    public float health;
-    public int maxHealth;
+   // public float health;
+    public int maxHealth = 3;
 
     [Header("Movement")]
     public float jumpFrequency = 0.7F;
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            playerSkills = new PlayerSkills();
+            playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
         }
         else
         {
@@ -42,14 +45,37 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    private void PlayerSkills_OnSkillUnlocked(object sender, PlayerSkills.OnSkillUnlockedEventArgs e)
+    {
+        switch (e.skillType)
+        {
+            case PlayerSkills.SkillType.MoveSpeed_1:
+                // SetMovementSpeed(50f);
+                break;
+            case PlayerSkills.SkillType.MoveSpeed_2:
+                // SetMovementSpeed(70f);
+                break;
+            case PlayerSkills.SkillType.HealthMax_1:
+                maxHealth= 5;
+                HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+                break;
+        }
+    }
+
     void Start()
     {
+        HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
         horizontalState = PlayerHorizontalState.IDLE;
         verticalState = PlayerVerticalState.GROUNDED;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
 
         dashTime = startDashTime;
+    }
+
+    public PlayerSkills GetPlayerSkills()
+    {
+        return playerSkills;
     }
 
     private void Update()
@@ -223,13 +249,17 @@ public class PlayerController : MonoBehaviour
 
     public void GetDamage(float damage)
     {
-        health -= damage;
-        HealthVisual.instance.healthSystem.Damage(2);
+     //   health -= damage;
+        HealthVisual.Instance.healthSystem.Damage(2);
     }
 
     public void ReceiveHealth(float healthReceived)
     {
-        health += healthReceived;
-        HealthVisual.instance.healthSystem.Heal(4);
+       // health += healthReceived;
+        HealthVisual.Instance.healthSystem.Heal(4);
+    }
+
+    public bool CanUseEarthShatter() {
+        return playerSkills.IsSkillUnlocked(PlayerSkills.SkillType.EarthShatter);
     }
 }

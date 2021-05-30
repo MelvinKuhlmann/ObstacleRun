@@ -49,7 +49,7 @@ public class InventoryManager : MonoBehaviour
         soulsAddedLabel.enabled = true;
         addedTime = addedLabelDuration;
         SaveSystem.SaveInventory(this);
-        HealthVisual.instance.healthSystem.Heal(40);
+        HealthVisual.Instance.healthSystem.Heal(40);
     }
 
     public int GetCurrentSouls()

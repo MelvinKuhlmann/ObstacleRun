@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using CodeMonkey.Utils;
 
-// https://www.youtube.com/watch?v=xWCJfE_sAXE : 23:00 
 public class HealthVisual : MonoBehaviour
 {
     [SerializeField]
@@ -23,29 +22,31 @@ public class HealthVisual : MonoBehaviour
     public HealthSystem healthSystem;
     private bool isHealing;
 
-    public static HealthVisual instance;
+    private static HealthVisual instance;
+    public static HealthVisual Instance { get { return instance; } }
 
     private void Awake()
     {
-        healthImageList = new List<HealthImage>();
-        if (instance != null)
+        if (instance != null && instance != this)
         {
-            return;
+            Destroy(this.gameObject);
+        } else 
+        { 
+            instance = this;
+            HealthSystem healthSystem = new HealthSystem(1); // max health
+            SetHealthSystem(healthSystem);
         }
-
-        instance = this;
     }
 
     private void Start()
     {
         FunctionPeriodic.Create(HealingAnimatedPeriodic, .05f);
-        HealthSystem healthSystem = new HealthSystem(4); // max health
-        SetHealthSystem(healthSystem);
     }
 
-    public void SetHealthSystem(HealthSystem healthSystem)
+    public void SetHealthSystem(HealthSystem newHealthSystem)
     {
-        this.healthSystem = healthSystem;
+        healthSystem = newHealthSystem;
+        healthImageList = new List<HealthImage>();
 
         List<HealthSystem.Health> healthList = healthSystem.GetHealthList();
         Vector2 healthAnchoredPosition = new Vector2(0, 0);
@@ -80,11 +81,11 @@ public class HealthVisual : MonoBehaviour
 
     private void RefreshAllHealth()
     {
-        List<HealthSystem.Health> healtList = healthSystem.GetHealthList();
+        List<HealthSystem.Health> healthList = healthSystem.GetHealthList();
         for (int i = 0; i < healthImageList.Count; i++)
         {
             HealthImage healthImage = healthImageList[i];
-            HealthSystem.Health health = healtList[i];
+            HealthSystem.Health health = healthList[i];
             healthImage.SetHealthFragments(health.GetFragmentAmount());
         }
     }
@@ -94,11 +95,11 @@ public class HealthVisual : MonoBehaviour
         if (isHealing)
         {
             bool fullyHealed = true;
-            List<HealthSystem.Health> healtList = healthSystem.GetHealthList();
-            for (int i = 0; i < healtList.Count; i++)
+            List<HealthSystem.Health> healthList = healthSystem.GetHealthList();
+            for (int i = 0; i < healthList.Count; i++)
             {
                 HealthImage healthImage = healthImageList[i];
-                HealthSystem.Health health = healtList[i];
+                HealthSystem.Health health = healthList[i];
                 if (healthImage.GetFragmentAmount() != health.GetFragmentAmount())
                 {
                     // Visual is different from logic
