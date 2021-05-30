@@ -12,6 +12,7 @@ public class PlayerSkills
     }
 
     public enum SkillType {
+        None,
         Dash,
         EarthShatter,      
         MoveSpeed_1,
@@ -27,7 +28,7 @@ public class PlayerSkills
         unlockedSkillTypeList = new List<SkillType>();
     }
 
-    public void UnlockSkill(SkillType skillType)
+    private void UnlockSkill(SkillType skillType)
     {
         if (!IsSkillUnlocked(skillType))
         {
@@ -39,5 +40,52 @@ public class PlayerSkills
     public bool IsSkillUnlocked(SkillType skillType)
     {
         return unlockedSkillTypeList.Contains(skillType);
+    }
+
+    public bool CanUnlock(SkillType skillType)
+    {
+        SkillType skillRequirement = GetSkillRequirement(skillType);
+        if (skillRequirement != SkillType.None)
+        {
+            if (IsSkillUnlocked(skillRequirement))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public SkillType GetSkillRequirement(SkillType skillType)
+    {
+        switch (skillType)
+        {
+            case SkillType.HealthMax_2:
+                return SkillType.HealthMax_1;
+            case SkillType.MoveSpeed_2:
+                return SkillType.MoveSpeed_1;
+            case SkillType.EarthShatter:
+                return SkillType.Dash;
+        }
+        return SkillType.None;
+    }
+
+    public bool TryUnlockSkill(SkillType skillType)
+    {
+        if (CanUnlock(skillType))
+        {
+            UnlockSkill(skillType);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
