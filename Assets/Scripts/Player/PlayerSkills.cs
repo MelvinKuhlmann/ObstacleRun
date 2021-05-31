@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerSkills
 {
@@ -43,17 +44,15 @@ public class PlayerSkills
 
     public bool CanUnlock(Skill skill)
     {
+        if (IsSkillUnlocked(skill.skillType))
+        {
+            Debug.LogWarning("Skill is already unlocked");
+            return false;
+        }
         Skill skillRequirement = GetSkillRequirement(skill);
         if (skillRequirement != null)
         {
-            if (IsSkillUnlocked(skillRequirement.skillType) && skill.unlockValue <= InventoryManager.instance.GetCurrentSouls())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return IsSkillUnlocked(skillRequirement.skillType) && skill.unlockValue <= InventoryManager.instance.GetCurrentSouls();
         }
         else
         {
@@ -63,11 +62,7 @@ public class PlayerSkills
 
     public Skill GetSkillRequirement(Skill skill)
     {
-        if(skill.requirement != null )
-        {
-            return skill.requirement;
-        }
-        return null;
+        return skill.requirement != null ? skill.requirement : null;
     }
 
     public bool TryUnlockSkill(Skill skill)

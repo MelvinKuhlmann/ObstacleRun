@@ -23,13 +23,14 @@ public class UISkillTree : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (instance == null)
         {
-            Destroy(this.gameObject);
-        }
-        else
-        {
+            DontDestroyOnLoad(gameObject);
             instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
         }
     }
     #endregion
@@ -126,7 +127,7 @@ public class UISkillTree : MonoBehaviour
             {
                 if (playerSkills.CanUnlock(skill))
                 {
-                   image.material = skillUnlockableMaterial;
+                    image.material = skillUnlockableMaterial;
                     transform.GetComponent<Button_UI>().enabled = true;
                     backgroundImage.color = new Color(.6f, .6f, .6f);
                     image.color = new Color(1f, 1f, 1f);
