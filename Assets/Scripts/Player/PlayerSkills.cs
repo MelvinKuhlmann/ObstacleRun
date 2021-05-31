@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerSkills
 {
@@ -70,29 +68,15 @@ public class PlayerSkills
             return skill.requirement;
         }
         return null;
-        /*switch (skillType)
-        {
-            case SkillType.HealthMax_3:     return SkillType.HealthMax_2;
-            case SkillType.HealthMax_2:     return SkillType.HealthMax_1;
-            case SkillType.MoveSpeed_2:     return SkillType.MoveSpeed_1;
-            case SkillType.EarthShatter:    return SkillType.Dash;
-        }
-        return SkillType.None;*/
     }
 
     public bool TryUnlockSkill(Skill skill)
     {
         if (CanUnlock(skill))
         {
-            //if (InventoryManager.instance.GetCurrentSouls() > 0)
-           // {
-                InventoryManager.instance.SubtractCollectedSouls(skill.unlockValue);
-                UnlockSkill(skill);
-                return true;
-            //} else
-            //{
-            //    return false;
-           // }
+            InventoryManager.instance.SubtractCollectedSouls(skill.unlockValue);
+            UnlockSkill(skill);
+            return true;
         }
         else
         {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using System;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class InventoryManager : MonoBehaviour
     public TMP_Text soulsAddedLabel;
     private float addedLabelDuration = 3f;
     private float addedTime;
+
+    public event EventHandler<int> OnSoulsChanged;
 
     #region Singleton
     public static InventoryManager instance;
@@ -48,8 +51,9 @@ public class InventoryManager : MonoBehaviour
         soulsAddedLabel.text = "+" + numberOfSouls;
         soulsAddedLabel.enabled = true;
         addedTime = addedLabelDuration;
+        OnSoulsChanged?.Invoke(this, numberOfSoulsCollected);
+
         SaveSystem.SaveInventory(this);
-        HealthVisual.Instance.healthSystem.Heal(40);
     }
 
     public int GetCurrentSouls()
@@ -61,6 +65,8 @@ public class InventoryManager : MonoBehaviour
     {
         numberOfSoulsCollected -= numberOfSouls;
         soulsLabel.text = numberOfSoulsCollected.ToString();
+        OnSoulsChanged?.Invoke(this, numberOfSoulsCollected);
+
         SaveSystem.SaveInventory(this);
     }
 }

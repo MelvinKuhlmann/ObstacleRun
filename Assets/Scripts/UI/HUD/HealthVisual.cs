@@ -29,7 +29,7 @@ public class HealthVisual : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         } else 
         { 
             instance = this;
