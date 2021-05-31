@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    #region Singleton
-    public static LevelManager instance;
+    #region singleton
+    private static LevelManager instance;
+    public static LevelManager Instance { get { return instance; } }
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null && instance != this)
         {
-            return;
+            Destroy(this.gameObject);
         }
-
-        instance = this;
+        else
+        {
+            instance = this;
+        }
     }
     #endregion
 

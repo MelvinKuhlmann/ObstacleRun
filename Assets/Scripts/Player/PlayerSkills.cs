@@ -8,7 +8,7 @@ public class PlayerSkills
     public event EventHandler<OnSkillUnlockedEventArgs> OnSkillUnlocked;
     public class OnSkillUnlockedEventArgs : EventArgs
     {
-        public SkillType skillType;
+        public Skill skill;
     }
 
     public enum SkillType {
@@ -29,12 +29,12 @@ public class PlayerSkills
         unlockedSkillTypeList = new List<SkillType>();
     }
 
-    private void UnlockSkill(SkillType skillType)
+    private void UnlockSkill(Skill skill)
     {
-        if (!IsSkillUnlocked(skillType))
+        if (!IsSkillUnlocked(skill.skillType))
         {
-            unlockedSkillTypeList.Add(skillType);
-            OnSkillUnlocked?.Invoke(this, new OnSkillUnlockedEventArgs { skillType = skillType });
+            unlockedSkillTypeList.Add(skill.skillType);
+            OnSkillUnlocked?.Invoke(this, new OnSkillUnlockedEventArgs { skill = skill });
         }
     }
 
@@ -43,12 +43,12 @@ public class PlayerSkills
         return unlockedSkillTypeList.Contains(skillType);
     }
 
-    public bool CanUnlock(SkillType skillType)
+    public bool CanUnlock(Skill skill)
     {
-        SkillType skillRequirement = GetSkillRequirement(skillType);
-        if (skillRequirement != SkillType.None)
+        Skill skillRequirement = GetSkillRequirement(skill);
+        if (skillRequirement != null)
         {
-            if (IsSkillUnlocked(skillRequirement))
+            if (IsSkillUnlocked(skillRequirement.skillType) && skill.unlockValue <= InventoryManager.instance.GetCurrentSouls())
             {
                 return true;
             }
@@ -59,35 +59,40 @@ public class PlayerSkills
         }
         else
         {
-            return true;
+            return skill.unlockValue <= InventoryManager.instance.GetCurrentSouls();
         }
     }
 
-    public SkillType GetSkillRequirement(SkillType skillType)
+    public Skill GetSkillRequirement(Skill skill)
     {
-        switch (skillType)
+        if(skill.requirement != null )
+        {
+            return skill.requirement;
+        }
+        return null;
+        /*switch (skillType)
         {
             case SkillType.HealthMax_3:     return SkillType.HealthMax_2;
             case SkillType.HealthMax_2:     return SkillType.HealthMax_1;
             case SkillType.MoveSpeed_2:     return SkillType.MoveSpeed_1;
             case SkillType.EarthShatter:    return SkillType.Dash;
         }
-        return SkillType.None;
+        return SkillType.None;*/
     }
 
-    public bool TryUnlockSkill(SkillType skillType)
+    public bool TryUnlockSkill(Skill skill)
     {
-        if (CanUnlock(skillType))
+        if (CanUnlock(skill))
         {
-            if(InventoryManager.instance.GetCurrentSouls() > 0)
-            {
-                InventoryManager.instance.SubtractCollectedSouls(1);
-                UnlockSkill(skillType);
+            //if (InventoryManager.instance.GetCurrentSouls() > 0)
+           // {
+                InventoryManager.instance.SubtractCollectedSouls(skill.unlockValue);
+                UnlockSkill(skill);
                 return true;
-            } else
-            {
-                return false;
-            }
+            //} else
+            //{
+            //    return false;
+           // }
         }
         else
         {

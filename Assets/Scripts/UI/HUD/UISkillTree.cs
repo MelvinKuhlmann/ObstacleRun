@@ -7,7 +7,7 @@ using TMPro;
 public class UISkillTree : MonoBehaviour
 {
     private PlayerSkills playerSkills;
-    private List<SkillButton> skillButtonList;
+    private List<SkillButtonController> skillButtonList;
 
     [SerializeField]
     private Material skillLockedMaterial;
@@ -36,17 +36,18 @@ public class UISkillTree : MonoBehaviour
     private void Start()
     {
         soulsLabel.text = InventoryManager.instance.GetCurrentSouls().ToString();
+        SetPlayerSkills(PlayerController.instance.GetPlayerSkills());
     }
 
     public void SetPlayerSkills(PlayerSkills playerSkills)
     {
         this.playerSkills = playerSkills;
 
-        skillButtonList = new List<SkillButton>();
-        skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - MaxHealth 1"), playerSkills, PlayerSkills.SkillType.HealthMax_1, skillLockedMaterial, skillUnlockableMaterial));
-        skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - MaxHealth 2"), playerSkills, PlayerSkills.SkillType.HealthMax_2, skillLockedMaterial, skillUnlockableMaterial));
-        skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - MaxHealth 3"), playerSkills, PlayerSkills.SkillType.HealthMax_3, skillLockedMaterial, skillUnlockableMaterial));
-        skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - Dash"), playerSkills, PlayerSkills.SkillType.Dash, skillLockedMaterial, skillUnlockableMaterial));
+        skillButtonList = new List<SkillButtonController>();
+        skillButtonList.Add(new SkillButtonController(transform.Find("SkillBtn - MaxHealth 1"), playerSkills, skillLockedMaterial, skillUnlockableMaterial));
+        skillButtonList.Add(new SkillButtonController(transform.Find("SkillBtn - MaxHealth 2"), playerSkills, skillLockedMaterial, skillUnlockableMaterial));
+        skillButtonList.Add(new SkillButtonController(transform.Find("SkillBtn - MaxHealth 3"), playerSkills, skillLockedMaterial, skillUnlockableMaterial));
+        skillButtonList.Add(new SkillButtonController(transform.Find("SkillBtn - Dash"), playerSkills, skillLockedMaterial, skillUnlockableMaterial));
 
         playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
         UpdateVisuals();
@@ -60,7 +61,7 @@ public class UISkillTree : MonoBehaviour
 
     private void UpdateVisuals()
     {
-        foreach (SkillButton skillButton in skillButtonList)
+        foreach (SkillButtonController skillButton in skillButtonList)
         {
             skillButton.UpdateVisual();
         }
@@ -69,30 +70,31 @@ public class UISkillTree : MonoBehaviour
     /*
      * Represents a single Skill Button
      */
-    private class SkillButton
+    private class SkillButtonController
     {
         private Transform transform;
         private Image image;
         private Image backgroundImage;
         private PlayerSkills playerSkills;
-        private PlayerSkills.SkillType skillType;
+        private Skill skill;
         private Material skillLockedMaterial;
         private Material skillUnlockableMaterial;
 
-        public SkillButton(Transform transform, PlayerSkills playerSkills, PlayerSkills.SkillType skillType, Material skillLockedMaterial, Material skillUnlockableMaterial)
+        public SkillButtonController(Transform transform, PlayerSkills playerSkills, Material skillLockedMaterial, Material skillUnlockableMaterial)
         {
             this.transform = transform;
             this.playerSkills = playerSkills;
-            this.skillType = skillType;
+            this.skill = transform.GetComponent<SkillButton>().skill;
             this.skillLockedMaterial = skillLockedMaterial;
             this.skillUnlockableMaterial = skillUnlockableMaterial;
 
             image = transform.Find("Image").GetComponent<Image>();
+            image.sprite = skill.icon;
             backgroundImage = transform.Find("Background").GetComponent<Image>();
 
             transform.GetComponent<Button_UI>().ClickFunc = () =>
             {
-                if (!playerSkills.TryUnlockSkill(skillType))
+                if (!playerSkills.TryUnlockSkill(skill))
                 {
                     Debug.LogWarning("requiremnts not met");
                 }
@@ -101,7 +103,7 @@ public class UISkillTree : MonoBehaviour
 
         public void UpdateVisual()
         {
-            if (playerSkills.IsSkillUnlocked(skillType))
+            if (playerSkills.IsSkillUnlocked(skill.skillType))
             {
                 image.material = null;
                 backgroundImage.color = new Color(1f, 1f, 1f);
@@ -109,7 +111,7 @@ public class UISkillTree : MonoBehaviour
             }
             else
             {
-                if (playerSkills.CanUnlock(skillType))
+                if (playerSkills.CanUnlock(skill))
                 {
                    image.material = skillUnlockableMaterial;
                     transform.GetComponent<Button_UI>().enabled = true;

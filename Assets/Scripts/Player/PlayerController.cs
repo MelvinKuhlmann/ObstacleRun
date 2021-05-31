@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerSkills_OnSkillUnlocked(object sender, PlayerSkills.OnSkillUnlockedEventArgs e)
     {
-        switch (e.skillType)
+        switch (e.skill.skillType)
         {
             case PlayerSkills.SkillType.MoveSpeed_1:
                 // SetMovementSpeed(50f);
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
-        UISkillTree.Instance.SetPlayerSkills(playerSkills);
+       // UISkillTree.Instance.SetPlayerSkills(playerSkills);
         horizontalState = PlayerHorizontalState.IDLE;
         verticalState = PlayerVerticalState.GROUNDED;
         animator = GetComponent<Animator>();
