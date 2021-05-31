@@ -33,8 +33,6 @@ public class HealthVisual : MonoBehaviour
         } else 
         { 
             instance = this;
-            HealthSystem healthSystem = new HealthSystem(1); // max health
-            SetHealthSystem(healthSystem);
         }
     }
 
@@ -45,6 +43,8 @@ public class HealthVisual : MonoBehaviour
 
     public void SetHealthSystem(HealthSystem newHealthSystem)
     {
+        healthSystem = null;
+        RemoveOld();
         healthSystem = newHealthSystem;
         healthImageList = new List<HealthImage>();
 
@@ -60,6 +60,14 @@ public class HealthVisual : MonoBehaviour
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnHealed += HealthSystem_OnHealed;
         healthSystem.OnDead += HealthSystem_OnDead;
+    }
+
+    private void RemoveOld()
+    {
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
@@ -130,8 +138,9 @@ public class HealthVisual : MonoBehaviour
         // Locate and Size of object
         healthGameObject.GetComponent<RectTransform>().anchoredPosition = anchoredPosition;
         healthGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
+        healthGameObject.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
 
-        healthGameObject.GetComponent<Animation>().AddClip(healthFullAnimationClip, "health_full");
+        healthGameObject.GetComponent<Animation>().AddClip(healthFullAnimationClip, "health_filled");
 
         // Set heart sprite
         Image heartImageUI = healthGameObject.GetComponent<Image>();
@@ -192,7 +201,7 @@ public class HealthVisual : MonoBehaviour
 
         public void PlayHealthFullAnimation()
         {
-            animation.Play("health_full", PlayMode.StopAll);
+            animation.Play("health_filled", PlayMode.StopAll);
         }
     }
 }

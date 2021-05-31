@@ -18,7 +18,8 @@ public class PlayerSkills
         MoveSpeed_1,
         MoveSpeed_2,
         HealthMax_1,
-        HealthMax_2
+        HealthMax_2,
+        HealthMax_3
     }
 
     private List<SkillType> unlockedSkillTypeList;
@@ -66,12 +67,10 @@ public class PlayerSkills
     {
         switch (skillType)
         {
-            case SkillType.HealthMax_2:
-                return SkillType.HealthMax_1;
-            case SkillType.MoveSpeed_2:
-                return SkillType.MoveSpeed_1;
-            case SkillType.EarthShatter:
-                return SkillType.Dash;
+            case SkillType.HealthMax_3:     return SkillType.HealthMax_2;
+            case SkillType.HealthMax_2:     return SkillType.HealthMax_1;
+            case SkillType.MoveSpeed_2:     return SkillType.MoveSpeed_1;
+            case SkillType.EarthShatter:    return SkillType.Dash;
         }
         return SkillType.None;
     }
@@ -80,8 +79,15 @@ public class PlayerSkills
     {
         if (CanUnlock(skillType))
         {
-            UnlockSkill(skillType);
-            return true;
+            if(InventoryManager.instance.GetCurrentSouls() > 0)
+            {
+                InventoryManager.instance.SubtractCollectedSouls(1);
+                UnlockSkill(skillType);
+                return true;
+            } else
+            {
+                return false;
+            }
         }
         else
         {

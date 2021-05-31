@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
             instance = this;
             playerSkills = new PlayerSkills();
             playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
-            UISkillTree.Instance.SetPlayerSkills(playerSkills);
         }
         else
         {
@@ -64,12 +63,17 @@ public class PlayerController : MonoBehaviour
                 maxHealth = 5;
                 HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
                 break;
+            case PlayerSkills.SkillType.HealthMax_3:
+                maxHealth = 6;
+                HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+                break;
         }
     }
 
     void Start()
     {
         HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+        UISkillTree.Instance.SetPlayerSkills(playerSkills);
         horizontalState = PlayerHorizontalState.IDLE;
         verticalState = PlayerVerticalState.GROUNDED;
         animator = GetComponent<Animator>();

@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using CodeMonkey.Utils;
+using TMPro;
 
 public class UISkillTree : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class UISkillTree : MonoBehaviour
     private Material skillLockedMaterial;
     [SerializeField]
     private Material skillUnlockableMaterial;
+    [SerializeField]
+    public TMP_Text soulsLabel;
 
     #region singleton
     private static UISkillTree instance;
@@ -31,6 +33,11 @@ public class UISkillTree : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        soulsLabel.text = InventoryManager.instance.GetCurrentSouls().ToString();
+    }
+
     public void SetPlayerSkills(PlayerSkills playerSkills)
     {
         this.playerSkills = playerSkills;
@@ -38,6 +45,7 @@ public class UISkillTree : MonoBehaviour
         skillButtonList = new List<SkillButton>();
         skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - MaxHealth 1"), playerSkills, PlayerSkills.SkillType.HealthMax_1, skillLockedMaterial, skillUnlockableMaterial));
         skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - MaxHealth 2"), playerSkills, PlayerSkills.SkillType.HealthMax_2, skillLockedMaterial, skillUnlockableMaterial));
+        skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - MaxHealth 3"), playerSkills, PlayerSkills.SkillType.HealthMax_3, skillLockedMaterial, skillUnlockableMaterial));
         skillButtonList.Add(new SkillButton(transform.Find("SkillBtn - Dash"), playerSkills, PlayerSkills.SkillType.Dash, skillLockedMaterial, skillUnlockableMaterial));
 
         playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
@@ -46,6 +54,7 @@ public class UISkillTree : MonoBehaviour
 
     private void PlayerSkills_OnSkillUnlocked(object sender, PlayerSkills.OnSkillUnlockedEventArgs e)
     {
+        soulsLabel.text = InventoryManager.instance.GetCurrentSouls().ToString();
         UpdateVisuals();
     }
 
@@ -95,19 +104,24 @@ public class UISkillTree : MonoBehaviour
             if (playerSkills.IsSkillUnlocked(skillType))
             {
                 image.material = null;
-                backgroundImage.material = null;
+                backgroundImage.color = new Color(1f, 1f, 1f);
+                image.color = new Color(1f, 1f, 1f);
             }
             else
             {
                 if (playerSkills.CanUnlock(skillType))
                 {
                    image.material = skillUnlockableMaterial;
-                   backgroundImage.material = skillUnlockableMaterial;
+                    transform.GetComponent<Button_UI>().enabled = true;
+                    backgroundImage.color = new Color(.6f, .6f, .6f);
+                    image.color = new Color(1f, 1f, 1f);
                 }
                 else
                 {
                     image.material = skillLockedMaterial;
-                    backgroundImage.material = skillLockedMaterial;
+                    transform.GetComponent<Button_UI>().enabled = false;
+                    backgroundImage.color = new Color(.2f, .2f, .2f);
+                    image.color = new Color(.2f, .2f, .2f);
                 }
             }
         }

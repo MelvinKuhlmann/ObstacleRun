@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SkillLockedMaterial
-  m_Shader: {fileID: 4800000, guid: 55ee994f7db18f943b14b55000d09023, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ba91035110a30594cb5178b8c5de6f6f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: b9e6346c63ec2364295d7400acd556ed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MaskTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -37,6 +41,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
+    - Vector1_870A094B: 0.3
+    - _Alpha: 1
     - _ColorMask: 15
     - _EnableExternalAlpha: 0
     - _Stencil: 0
