@@ -2,29 +2,35 @@
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Ground check")]
+    public Transform feetPos;
+    public float checkRadius;
+    public LayerMask whatIsGround;
+    public bool isGrounded;
+
     private PlayerHorizontalState horizontalState;
     private PlayerVerticalState verticalState;
     private PlayerSkills playerSkills;
     private Animator animator;
     private Rigidbody2D rigidBody;
-    private float jumpIn;
     private float horizontal;
-    private float vertical;
 
     public ParticleSystem dust;
 
     [Header("Health")]
-   // public float health;
     public int maxHealth = 3;
 
     [Header("Movement")]
-    public float jumpFrequency = 0.7F;
     public float moveSpeed = 10F;
-    public float jumpHeight = 25F;
+    public float jumpForce = 25F;
     public float dashSpeed;
 
-    private float dashTime;
-    public float startDashTime;
+    private float jumpTimeCounter;
+    public float jumpTime;
+    private bool isJumping;
+
+    private float dashTimeCounter;
+    public float dashTime;
 
     #region Singleton
     public static PlayerController instance;
@@ -73,13 +79,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
-       // UISkillTree.Instance.SetPlayerSkills(playerSkills);
         horizontalState = PlayerHorizontalState.IDLE;
-        verticalState = PlayerVerticalState.GROUNDED;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
 
-        dashTime = startDashTime;
+        dashTimeCounter = dashTime;
     }
 
     public PlayerSkills GetPlayerSkills()
@@ -90,17 +94,18 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
-        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+
+        if(!isGrounded && rigidBody.velocity.y < 0)
+        {
+            verticalState = PlayerVerticalState.FALLING;
+        }
     }
 
     void FixedUpdate()
     {
         HandleState();
-    }
-
-    private void LateUpdate()
-    {
-        jumpIn -= Time.deltaTime;
     }
 
     private void HandleState()
@@ -151,17 +156,36 @@ public class PlayerController : MonoBehaviour
         animator.Play(animation);
     }
 
-    public void HandleJump()
+    public void HandleSmallJump()
     {
         if (!PlayerIsInTheAir())
         {
-            if (jumpIn < 0)
-            {
-                jumpIn = jumpFrequency;
-                rigidBody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-                verticalState = PlayerVerticalState.JUMPING;
-            }
+            rigidBody.velocity = Vector2.up * jumpForce;
+            verticalState = PlayerVerticalState.JUMPING;
+            isJumping = true;
+            jumpTimeCounter = jumpTime;
         }
+    }
+
+    public void HandleJump()
+    {
+        if (isJumping)
+        {
+            if (jumpTimeCounter > 0)
+            {
+                rigidBody.velocity = Vector2.up * jumpForce;
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            verticalState = PlayerVerticalState.JUMPING;
+        } else
+        {
+            isJumping = false;
+        }
+    }
+
+    public void HandleStopJump()
+    {
+        isJumping = false;
     }
 
     public void HandleIdle()
@@ -175,17 +199,16 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if (dashTime <= 0)
-        {
-            dashTime = startDashTime;
-            rigidBody.velocity = Vector2.zero;
-        }
-        else
+        if (dashTimeCounter > 0) 
         {
             CameraController.instance.Shake(1);
             CreateDust();
-            dashTime -= Time.deltaTime;
+            dashTimeCounter -= Time.deltaTime;
             rigidBody.velocity = Vector2.left * dashSpeed;
+        } else
+        {
+            dashTimeCounter = dashTime;
+            rigidBody.velocity = Vector2.zero;
         }
     }
 
@@ -195,17 +218,16 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if (dashTime <= 0)
-        {
-            dashTime = startDashTime;
-            rigidBody.velocity = Vector2.zero;
-        }
-        else
+        if (dashTimeCounter > 0)
         {
             CameraController.instance.Shake(1);
             CreateDust();
-            dashTime -= Time.deltaTime;
+            dashTimeCounter -= Time.deltaTime;
             rigidBody.velocity = Vector2.right * dashSpeed;
+        } else
+        {
+            dashTimeCounter = dashTime;
+            rigidBody.velocity = Vector2.zero;
         }
     }
 
@@ -226,24 +248,6 @@ public class PlayerController : MonoBehaviour
         horizontalState = PlayerHorizontalState.ATTACK_SLASH;
     }
 
-    public void Fall()
-    {
-        if (verticalState != PlayerVerticalState.GROUNDED)
-        {
-            verticalState = PlayerVerticalState.FALLING;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag(Tags.Floor.ToString()) && !verticalState.Equals(PlayerVerticalState.GROUNDED))
-        {
-            CreateDust();
-//            CameraController.instance.Shake(-1);
-            verticalState = PlayerVerticalState.GROUNDED;
-        }
-    }
-
     private void CreateDust()
     {
         dust.Play();
@@ -251,7 +255,15 @@ public class PlayerController : MonoBehaviour
 
     private bool PlayerIsInTheAir()
     {
-        return PlayerIsJumping() || PlayerIsFalling();
+        return !isGrounded;
+    }
+
+    public void Fall()
+    {
+        if (!isGrounded)
+        {
+            verticalState = PlayerVerticalState.FALLING;
+        }
     }
 
     private bool PlayerIsJumping()

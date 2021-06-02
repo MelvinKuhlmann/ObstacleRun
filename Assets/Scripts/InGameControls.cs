@@ -26,9 +26,19 @@ public class InGameControls : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayerController.instance.HandleSmallJump();
+        }
+
         if (Input.GetKey(KeyCode.Space))
         {
             PlayerController.instance.HandleJump();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            PlayerController.instance.HandleStopJump();
         }
 
         if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))

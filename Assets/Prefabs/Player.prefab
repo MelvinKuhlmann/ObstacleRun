@@ -4938,6 +4938,36 @@ PolygonCollider2D:
       - {x: 0.04, y: -0.885}
       - {x: 0.04, y: 0.79499996}
       - {x: -0.02, y: 0.875}
+--- !u!1 &2488369388475086520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2152284758199992268}
+  m_Layer: 9
+  m_Name: FeetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2152284758199992268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488369388475086520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.062, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6411384030803462515}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6411384030500809793
 GameObject:
   m_ObjectHideFlags: 0
@@ -6292,6 +6322,7 @@ Transform:
   - {fileID: 6411384032235892683}
   - {fileID: 1172624321}
   - {fileID: 1922215184}
+  - {fileID: 2152284758199992268}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6336,7 +6367,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -6373,14 +6404,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54460dedcae14bf4392d9874962d8316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  feetPos: {fileID: 2152284758199992268}
+  checkRadius: 0.3
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 4096
+  isGrounded: 0
   dust: {fileID: 1172624323}
-  health: 2.5
   maxHealth: 3
-  jumpFrequency: 0
   moveSpeed: 10
-  jumpHeight: 25
+  jumpForce: 15
   dashSpeed: 200
-  startDashTime: 0.2
+  jumpTime: 0.3
+  dashTime: 0.2
 --- !u!1 &6411384032156286365
 GameObject:
   m_ObjectHideFlags: 0
