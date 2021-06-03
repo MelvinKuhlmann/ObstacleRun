@@ -28,12 +28,12 @@ public class InGameControls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            PlayerController.instance.HandleSmallJump();
+            PlayerController.instance.HandleJump();
         }
 
         if (Input.GetKey(KeyCode.Space))
         {
-            PlayerController.instance.HandleJump();
+            PlayerController.instance.HandleKeepJumping();
         }
 
         if (Input.GetKeyUp(KeyCode.Space))

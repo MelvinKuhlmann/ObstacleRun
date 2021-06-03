@@ -2,12 +2,6 @@
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Ground check")]
-    public Transform feetPos;
-    public float checkRadius;
-    public LayerMask whatIsGround;
-    public bool isGrounded;
-
     private PlayerHorizontalState horizontalState;
     private PlayerVerticalState verticalState;
     private PlayerSkills playerSkills;
@@ -31,6 +25,23 @@ public class PlayerController : MonoBehaviour
 
     private float dashTimeCounter;
     public float dashTime;
+
+    [Header("Ground check")]
+    public Transform feetPos;
+    public float checkRadius;
+    public LayerMask whatIsGround;
+    private bool isGrounded;
+
+    [Header("Wall Jump")]
+    public Transform frontCheck;
+    public float wallSlidingSpeed;
+    public float horizontalWallForce;
+    public float verticalWallForce;
+    public float wallJumpTime;
+    private bool wallSliding;
+    private bool isTouchingFront;
+    private bool wallJumping;
+
 
     #region Singleton
     public static PlayerController instance;
@@ -96,16 +107,29 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
-
-        if(!isGrounded && rigidBody.velocity.y < 0)
-        {
-            verticalState = PlayerVerticalState.FALLING;
-        }
     }
 
     void FixedUpdate()
     {
+        if (!isGrounded && rigidBody.velocity.y < 0)
+        {
+            verticalState = PlayerVerticalState.FALLING;
+        }
+
         HandleState();
+
+        //TODO move to handle state
+        isTouchingFront = Physics2D.OverlapCircle(frontCheck.position, checkRadius, whatIsGround);
+        wallSliding = isTouchingFront && !isGrounded && horizontalState != PlayerHorizontalState.IDLE;
+        if (wallSliding)
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, Mathf.Clamp(rigidBody.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+
+        if (wallJumping)
+        {
+            rigidBody.velocity = new Vector2(horizontalWallForce * -horizontal, verticalWallForce);
+        }
     }
 
     private void HandleState()
@@ -156,7 +180,7 @@ public class PlayerController : MonoBehaviour
         animator.Play(animation);
     }
 
-    public void HandleSmallJump()
+    public void HandleJump()
     {
         if (!PlayerIsInTheAir())
         {
@@ -165,9 +189,20 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
             jumpTimeCounter = jumpTime;
         }
+
+        if (wallSliding)
+        {
+            wallJumping = true;
+            Invoke("SetWallJumpingToFalse", wallJumpTime);
+        }
     }
 
-    public void HandleJump()
+    void SetWallJumpingToFalse()
+    {
+        wallJumping = false;
+    }
+
+    public void HandleKeepJumping()
     {
         if (isJumping)
         {
