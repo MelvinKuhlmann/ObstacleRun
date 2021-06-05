@@ -144,6 +144,11 @@ public class SceneController : MonoBehaviour
         Transform enteringTransform = entrance.transitioningGameObject.transform;
         enteringTransform.position = entranceLocation.position;
         enteringTransform.rotation = entranceLocation.rotation;
+
+        Debug.LogError(entrance.gameObject.name);
+        Debug.LogWarning(enteringTransform.position);
+        Debug.LogWarning("To");
+        Debug.LogWarning(entranceLocation.position);
     }
 
     protected void SetupNewScene(TransitionPoint.TransitionType transitionType, SceneTransitionDestination entrance)

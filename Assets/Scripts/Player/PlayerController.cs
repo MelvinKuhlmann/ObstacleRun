@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         if (instance == null)
         {
-            DontDestroyOnLoad(gameObject);
+           // DontDestroyOnLoad(gameObject);
             instance = this;
             playerSkills = new PlayerSkills();
             playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;

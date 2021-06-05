@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this);
+       // DontDestroyOnLoad(this);
     }
     #endregion
 

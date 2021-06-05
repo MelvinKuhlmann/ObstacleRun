@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1756836141556698503}
   - component: {fileID: 1756836141556698520}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: TransitionStartToLevelXA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756836141556698521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.439085, y: 30.886646, z: -197.08517}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitioningGameObject: {fileID: 0}
   transitionType: 0
-  newSceneName: 
+  newSceneName: Test
   transitionDestinationTag: 0
   destinationTransform: {fileID: 0}
   transitionWhen: 2

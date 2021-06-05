@@ -74,7 +74,9 @@ public class GameObjectTeleporter : MonoBehaviour
 
         if (fade)
             yield return StartCoroutine(ScreenFader.FadeSceneOut());
-
+        Debug.LogWarning(transitioningGameObject.transform.position);
+        Debug.LogWarning("TO");
+        Debug.LogWarning(destinationPosition);
         transitioningGameObject.transform.position = destinationPosition;
 
         if (fade)

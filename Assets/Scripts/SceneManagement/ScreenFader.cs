@@ -83,22 +83,18 @@ public class ScreenFader : MonoBehaviour
 
     public static IEnumerator FadeSceneIn()
     {
-        Debug.Log("fadein");
         CanvasGroup canvasGroup;
         if (Instance.faderCanvasGroup.alpha > 0.1f)
         {
             canvasGroup = Instance.faderCanvasGroup;
-            Debug.Log("fader");
         }
         else if (Instance.gameOverCanvasGroup.alpha > 0.1f)
         {
             canvasGroup = Instance.gameOverCanvasGroup;
-            Debug.Log("gameover");
         }
         else
         {
             canvasGroup = Instance.loadingCanvasGroup;
-            Debug.Log("loading");
         }
 
         yield return Instance.StartCoroutine(Instance.Fade(0f, canvasGroup));
@@ -108,7 +104,6 @@ public class ScreenFader : MonoBehaviour
 
     public static IEnumerator FadeSceneOut(FadeType fadeType = FadeType.Black)
     {
-        Debug.Log("fadeout " + fadeType);
         CanvasGroup canvasGroup;
         switch (fadeType)
         {
