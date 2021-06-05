@@ -17,7 +17,6 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-
         InventoryData data = SaveSystem.LoadInventory();
         numberOfSoulsCollected = data.collectedSouls;
         if (instance != null)
