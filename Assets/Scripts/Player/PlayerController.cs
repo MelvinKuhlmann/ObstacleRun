@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private PlayerSkills playerSkills;
     private Animator animator;
     private Rigidbody2D rigidBody;
+    public Damageable damageable;
     private float horizontal;
 
     public ParticleSystem dust;
@@ -309,6 +310,13 @@ public class PlayerController : MonoBehaviour
     private bool PlayerIsFalling()
     {
         return verticalState == PlayerVerticalState.FALLING;
+    }
+
+    public void OnDamageTaken(Damager damager, Damageable damageable)
+    {
+        Debug.LogWarning(damager.damage + " received");
+        HealthVisual.Instance.healthSystem.Damage(damager.damage * 2);
+        damageable.EnableInvulnerability();
     }
 
     public void GetDamage(float damage)

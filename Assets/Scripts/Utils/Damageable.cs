@@ -26,7 +26,7 @@ public class Damageable : MonoBehaviour //, IDataPersister
     public DamageEvent OnTakeDamage;
     public DamageEvent OnDie;
     public HealEvent OnGainHealth;
-    [HideInInspector]
+   // [HideInInspector]
    // public DataSettings dataSettings;
 
     protected bool m_Invulnerable;
@@ -87,6 +87,8 @@ public class Damageable : MonoBehaviour //, IDataPersister
 
     public void TakeDamage(Damager damager, bool ignoreInvincible = false)
     {
+        Debug.LogWarning(gameObject.name + " damage taken by " + damager.gameObject.name);
+
         if ((m_Invulnerable && !ignoreInvincible) || m_CurrentHealth <= 0)
             return;
 
