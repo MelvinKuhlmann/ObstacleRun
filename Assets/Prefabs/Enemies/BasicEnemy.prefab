@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7255760060664718659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.823, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7255760061775708993}
@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  offset: {x: 1.5, y: 1}
-  size: {x: 2.5, y: 1}
+  offset: {x: 0.25, y: 0.22}
+  size: {x: 0.88, y: 0.93}
   offsetBasedOnSpriteFacing: 1
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 7255760061775708994}
   canHitTriggers: 0
   disableDamageAfterHit: 0
   forceRespawn: 0
@@ -245,8 +245,8 @@ MonoBehaviour:
   groundedLayerMask:
     serializedVersion: 2
     m_Bits: 4096
-  feetPos: {fileID: 7255760061808931192}
   checkRadius: 0.3
+  feetPos: {fileID: 7255760061808931192}
   frontCheck: {fileID: 7255760061584624892}
 --- !u!114 &7255760061775708997
 MonoBehaviour:
@@ -263,6 +263,8 @@ MonoBehaviour:
   spriteFaceLeft: 0
   speed: 5
   gravity: 10
+  checkAheadRange: 2
+  checkAttackAheadRange: 5
   viewDirection: 0
   viewFov: 360
   viewDistance: 5
@@ -396,8 +398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  offset: {x: 1.5, y: 1}
-  size: {x: 2.5, y: 1}
+  offset: {x: -0.003396988, y: 0.03583026}
+  size: {x: 1.284481, y: 1.1293817}
   offsetBasedOnSpriteFacing: 0
   spriteRenderer: {fileID: 0}
   canHitTriggers: 0

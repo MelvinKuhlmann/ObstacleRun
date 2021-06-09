@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private PlayerSkills playerSkills;
     private Animator animator;
     private Rigidbody2D rigidBody;
+    public Damager meleeDamager;
     public Damageable damageable;
     private float horizontal;
 
@@ -94,6 +95,7 @@ public class PlayerController : MonoBehaviour
         horizontalState = PlayerHorizontalState.IDLE;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
+        meleeDamager.DisableDamage();
 
         dashTimeCounter = dashTime;
     }
@@ -281,7 +283,15 @@ public class PlayerController : MonoBehaviour
 
     public void HandleAttack()
     {
+        meleeDamager.EnableDamage();
         horizontalState = PlayerHorizontalState.ATTACK_SLASH;
+        meleeDamager.disableDamageAfterHit = true;
+        Invoke("DisableMeleeAttack", 0.2F);
+    }
+
+    public void DisableMeleeAttack()
+    {
+        meleeDamager.DisableDamage();
     }
 
     private void CreateDust()

@@ -19,7 +19,7 @@ public class ChomperRunToTargetSMB : SceneLinkedSMB<EnemyBehaviour>
         m_MonoBehaviour.CheckMeleeAttack();
 
         float amount = m_MonoBehaviour.speed * 2.0f;
-        if (m_MonoBehaviour.CheckForObstacle(amount))
+        if (m_MonoBehaviour.CheckForObstacle(amount) || !m_MonoBehaviour.CheckGroundAhead(m_MonoBehaviour.checkAttackAheadRange))
         {
             m_MonoBehaviour.ForgetTarget();
         }

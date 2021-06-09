@@ -20,10 +20,12 @@ public class EnemyBehaviour : MonoBehaviour
     [Header("Movement")]
     public float speed;
     public float gravity = 10.0f;
+    public float checkAheadRange = 0;
+    public float checkAttackAheadRange = 0;
 
-   /* [Header("References")]
-    [Tooltip("If the enemy will be using ranged attack, set a prefab of the projectile it should use")]
-    public Bullet projectilePrefab;*/
+    /* [Header("References")]
+     [Tooltip("If the enemy will be using ranged attack, set a prefab of the projectile it should use")]
+     public Bullet projectilePrefab;*/
 
     [Header("Scanning settings")]
     [Tooltip("The angle of the forward of the view cone. 0 is forward of the sprite, 90 is up, 180 behind etc.")]
@@ -191,6 +193,16 @@ public class EnemyBehaviour : MonoBehaviour
         return Physics2D.OverlapCircle(m_CharacterController2D.frontCheck.position, m_CharacterController2D.checkRadius, m_CharacterController2D.groundedLayerMask);
 
         //return false;
+    }
+
+    public bool CheckGroundAhead(float forwardDistance)
+    {
+        /*  Debug.LogError(forwardDistance + " added");
+          Debug.LogError(m_CharacterController2D.feetAheadPos.position.x + " current pos");
+          Debug.LogError((m_CharacterController2D.feetAheadPos.position.x + forwardDistance) + " checked pos");*/
+       // forwardDistance = 
+        Vector2 pos = new Vector2(m_CharacterController2D.feetPos.position .x + (m_MoveVector.x < 0f ? forwardDistance * -1 : forwardDistance), m_CharacterController2D.feetPos.position.y);
+        return Physics2D.OverlapCircle(pos, m_CharacterController2D.checkRadius, m_CharacterController2D.groundedLayerMask);
     }
 
     public void SetFacingData(int facing)

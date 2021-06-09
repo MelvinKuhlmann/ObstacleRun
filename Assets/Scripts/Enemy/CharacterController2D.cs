@@ -7,8 +7,8 @@ public class CharacterController2D : MonoBehaviour
 {
     [Tooltip("The Layers which represent gameobjects that the Character Controller can be grounded on.")]
     public LayerMask groundedLayerMask;
-    public Transform feetPos;
     public float checkRadius;
+    public Transform feetPos;
     public Transform frontCheck;
 
     Rigidbody2D m_Rigidbody2D;
