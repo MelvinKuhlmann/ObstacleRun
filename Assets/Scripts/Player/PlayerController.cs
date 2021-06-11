@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem dust;
 
-    [Header("Health")]
-    public int maxHealth = 3;
+  //  [Header("Health")]
+   // public int maxHealth = 3;
 
     [Header("Movement")]
     public float moveSpeed = 10F;
@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     private bool wallSliding;
     private bool isTouchingFront;
     private bool wallJumping;
-
 
     #region Singleton
     public static PlayerController instance;
@@ -75,23 +74,26 @@ public class PlayerController : MonoBehaviour
                 // SetMovementSpeed(70f);
                 break;
             case PlayerSkills.SkillType.HealthMax_1:
-                maxHealth= 4;
-                HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+            //    maxHealth= 4;
+           //     damageable.IncreaseMaxHealth(1);
+            //    HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
                 break;
             case PlayerSkills.SkillType.HealthMax_2:
-                maxHealth = 5;
-                HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+             //   maxHealth = 5;
+            //    damageable.IncreaseMaxHealth(1);
+                //  HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
                 break;
             case PlayerSkills.SkillType.HealthMax_3:
-                maxHealth = 6;
-                HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+            //    maxHealth = 6;
+            //    damageable.IncreaseMaxHealth(1);
+                //  HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
                 break;
         }
     }
 
     void Start()
     {
-        HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+     //   HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
         horizontalState = PlayerHorizontalState.IDLE;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -324,19 +326,47 @@ public class PlayerController : MonoBehaviour
 
     public void OnDamageTaken(Damager damager, Damageable damageable)
     {
-        Debug.LogWarning(damager.damage + " received");
+       /* Debug.LogWarning(damager.damage + " received");
         HealthVisual.Instance.healthSystem.Damage(damager.damage * 2);
-        damageable.EnableInvulnerability();
+        damageable.EnableInvulnerability();*/
     }
+
+    public void OnHurt(Damager damager, Damageable damageable)
+    {
+        //if the player don't have control, we shouldn't be able to be hurt as this wouldn't be fair
+      //  if (!PlayerInput.Instance.HaveControl)
+      //      return;
+
+      //  UpdateFacing(damageable.GetDamageDirection().x > 0f);
+        damageable.EnableInvulnerability();
+
+        //   m_Animator.SetTrigger(m_HashHurtPara);
+
+        //we only force respawn if helath > 0, otherwise both forceRespawn & Death trigger are set in the animator, messing with each other.
+        if (damageable.CurrentHealth > 0 && damager.forceRespawn)
+        {
+        //    m_Animator.SetTrigger(m_HashForcedRespawnPara);
+        }
+
+      //  m_Animator.SetBool(m_HashGroundedPara, false);
+      //  hurtAudioPlayer.PlayRandomSound();
+
+        //if the health is < 0, mean die callback will take care of respawn
+        if (damager.forceRespawn && damageable.CurrentHealth > 0)
+        {
+          //  StartCoroutine(DieRespawnCoroutine(false, true));
+        }
+    }
+
 
     public void GetDamage(float damage)
     {
-        HealthVisual.Instance.healthSystem.Damage(2);
+      //  HealthVisual.Instance.healthSystem.Damage(2);
     }
 
     public void ReceiveHealth(float healthReceived)
     {
-        HealthVisual.Instance.healthSystem.Heal(4);
+      //  HealthVisual.Instance.healthSystem.Heal(4);
     }
 
     public bool CanUseEarthShatter() {

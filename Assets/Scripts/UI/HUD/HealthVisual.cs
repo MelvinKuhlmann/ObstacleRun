@@ -48,7 +48,7 @@ public class HealthVisual : MonoBehaviour
         healthSystem = newHealthSystem;
         healthImageList = new List<HealthImage>();
 
-        List<HealthSystem.Health> healthList = healthSystem.GetHealthList();
+       /* List<HealthSystem.Health> healthList = healthSystem.GetHealthList();
         Vector2 healthAnchoredPosition = new Vector2(0, 0);
         for (int i = 0; i < healthList.Count; i++)
         {
@@ -59,7 +59,7 @@ public class HealthVisual : MonoBehaviour
 
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnHealed += HealthSystem_OnHealed;
-        healthSystem.OnDead += HealthSystem_OnDead;
+        healthSystem.OnDead += HealthSystem_OnDead;*/
     }
 
     private void RemoveOld()

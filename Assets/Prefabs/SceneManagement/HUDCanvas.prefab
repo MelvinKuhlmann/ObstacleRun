@@ -107,7 +107,7 @@ RectTransform:
   - {fileID: 3075133902765877133}
   - {fileID: 6258069028468184685}
   m_Father: {fileID: 4871644418072564924}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -129,60 +129,6 @@ MonoBehaviour:
   numberOfSoulsCollected: 0
   soulsLabel: {fileID: 4323697641644113672}
   soulsAddedLabel: {fileID: 4323697640081948195}
---- !u!1 &3598776192363549001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3598776192363549002}
-  - component: {fileID: 3598776192363549003}
-  m_Layer: 5
-  m_Name: Health
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3598776192363549002
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3598776192363549001}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4871644418072564924}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -30}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3598776192363549003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3598776192363549001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352cebe33d01179438f034abb9711868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health0Sprite: {fileID: 3375619552477013837, guid: a949db1a04b19ad4fa722d1dce69b7cf, type: 3}
-  health1Sprite: {fileID: -8425476681720057099, guid: a949db1a04b19ad4fa722d1dce69b7cf, type: 3}
-  health2Sprite: {fileID: 3917825567828413762, guid: a949db1a04b19ad4fa722d1dce69b7cf, type: 3}
-  health3Sprite: {fileID: 5339652579274257687, guid: a949db1a04b19ad4fa722d1dce69b7cf, type: 3}
-  health4Sprite: {fileID: -6741907371364557799, guid: a949db1a04b19ad4fa722d1dce69b7cf, type: 3}
-  healthFullAnimationClip: {fileID: 7400000, guid: f25215a407a397040971f70dd22d03b7, type: 2}
 --- !u!1 &6440295542041481782
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +293,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 3598776192363549002}
   - {fileID: 3653781000116680964}
   m_Father: {fileID: 0}
   m_RootOrder: 0
