@@ -92,8 +92,6 @@ public class Damageable : MonoBehaviour //, IDataPersister
 
     public void TakeDamage(Damager damager, bool ignoreInvincible = false)
     {
-        Debug.LogWarning(m_CurrentHealth + " " + damager.damage);
-
         if ((m_Invulnerable && !ignoreInvincible) || m_CurrentHealth <= 0)
             return;
 
