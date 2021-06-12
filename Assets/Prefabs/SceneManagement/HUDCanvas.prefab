@@ -126,6 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60236d7a4b95ce24bb52d4d96152467f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataSettings:
+    dataTag: InventoryData
+    persistenceType: 3
   numberOfSoulsCollected: 0
   soulsLabel: {fileID: 4323697641644113672}
   soulsAddedLabel: {fileID: 4323697640081948195}

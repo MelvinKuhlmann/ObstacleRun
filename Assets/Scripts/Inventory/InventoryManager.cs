@@ -2,8 +2,9 @@
 using TMPro;
 using System;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IDataPersister
 {
+    public DataSettings dataSettings;
     public int numberOfSoulsCollected = 0;
     public TMP_Text soulsLabel;
     public TMP_Text soulsAddedLabel;
@@ -17,8 +18,8 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        InventoryData data = SaveSystem.LoadInventory();
-        numberOfSoulsCollected = data.collectedSouls;
+       // InventoryData data = SaveSystem.LoadInventory();
+       // numberOfSoulsCollected = data.collectedSouls;
         if (instance != null)
         {
             return;
@@ -43,6 +44,16 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        PersistentDataManager.RegisterPersister(this);
+    }
+
+    void OnDisable()
+    {
+        PersistentDataManager.UnregisterPersister(this);
+    }
+
     public void AddCollectedSouls(int numberOfSouls)
     {
         numberOfSoulsCollected += numberOfSouls;
@@ -52,7 +63,7 @@ public class InventoryManager : MonoBehaviour
         addedTime = addedLabelDuration;
         OnSoulsChanged?.Invoke(this, numberOfSoulsCollected);
 
-        SaveSystem.SaveInventory(this);
+      //  SaveSystem.SaveInventory(this);
     }
 
     public int GetCurrentSouls()
@@ -66,6 +77,32 @@ public class InventoryManager : MonoBehaviour
         soulsLabel.text = numberOfSoulsCollected.ToString();
         OnSoulsChanged?.Invoke(this, numberOfSoulsCollected);
 
-        SaveSystem.SaveInventory(this);
+      //  SaveSystem.SaveInventory(this);
+    }
+
+    public DataSettings GetDataSettings()
+    {
+        return dataSettings;
+    }
+
+    public void SetDataSettings(string dataTag, DataSettings.PersistenceType persistenceType)
+    {
+        dataSettings.dataTag = dataTag;
+        dataSettings.persistenceType = persistenceType;
+    }
+
+    public SData SaveData()
+    {
+        Debug.LogError("Save " + numberOfSoulsCollected);
+        return new SData<int>(numberOfSoulsCollected);
+    }
+
+    public void LoadData(SData data)
+    {
+        SData<int> inventoryData = (SData<int>)data;
+
+        Debug.LogError("load " + inventoryData.value);
+        numberOfSoulsCollected = inventoryData.value;
+        OnSoulsChanged?.Invoke(this, numberOfSoulsCollected);
     }
 }

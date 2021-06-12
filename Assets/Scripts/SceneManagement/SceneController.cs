@@ -99,17 +99,17 @@ public class SceneController : MonoBehaviour
     protected IEnumerator Transition(string newSceneName, bool resetInputValues, SceneTransitionDestination.DestinationTag destinationTag, TransitionPoint.TransitionType transitionType = TransitionPoint.TransitionType.DifferentZone)
     {
         m_Transitioning = true;
-        //      PersistentDataManager.SaveAllData();
+        PersistentDataManager.SaveAllData();
 
         /*    if (m_PlayerInput == null)
                 m_PlayerInput = FindObjectOfType<PlayerInput>();
             m_PlayerInput.ReleaseControl(resetInputValues);*/
         yield return StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.Loading));
-        //      PersistentDataManager.ClearPersisters();
+        PersistentDataManager.ClearPersisters();
         yield return SceneManager.LoadSceneAsync(newSceneName);
         /* m_PlayerInput = FindObjectOfType<PlayerInput>();
-            m_PlayerInput.ReleaseControl(resetInputValues);
-            PersistentDataManager.LoadAllData();*/
+            m_PlayerInput.ReleaseControl(resetInputValues);*/
+        PersistentDataManager.LoadAllData();
         SceneTransitionDestination entrance = GetDestination(destinationTag);
         SetEnteringGameObjectLocation(entrance);
         SetupNewScene(transitionType, entrance);

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : ObjectPool<EnemySpawner, Enemy, Vector2>//, IDataPersister
+public class EnemySpawner : ObjectPool<EnemySpawner, Enemy, Vector2>, IDataPersister
 {
     public int totalEnemiesToBeSpawned;
     public int concurrentEnemiesToBeSpawned;
     public float spawnArea = 1.0f;
     public float spawnDelay;
     public float removalDelay;
-   // public DataSettings dataSettings;
+    public DataSettings dataSettings;
 
     protected int m_TotalSpawnedEnemyCount;
     protected int m_CurrentSpawnedEnemyCount;
@@ -18,12 +18,12 @@ public class EnemySpawner : ObjectPool<EnemySpawner, Enemy, Vector2>//, IDataPer
 
     void OnEnable()
     {
-     //   PersistentDataManager.RegisterPersister(this);
+        PersistentDataManager.RegisterPersister(this);
     }
 
     void OnDisable()
     {
-      //  PersistentDataManager.UnregisterPersister(this);
+        PersistentDataManager.UnregisterPersister(this);
     }
 
     void Start()
@@ -73,7 +73,7 @@ public class EnemySpawner : ObjectPool<EnemySpawner, Enemy, Vector2>//, IDataPer
         m_SpawnTimerCoroutine = null;
     }
 
-   /* public DataSettings GetDataSettings()
+    public DataSettings GetDataSettings()
     {
         return dataSettings;
     }
@@ -84,16 +84,16 @@ public class EnemySpawner : ObjectPool<EnemySpawner, Enemy, Vector2>//, IDataPer
         dataSettings.persistenceType = persistenceType;
     }
 
-    public Data SaveData()
+    public SData SaveData()
     {
-        return new Data<int>(m_TotalSpawnedEnemyCount);
+        return new SData<int>(m_TotalSpawnedEnemyCount);
     }
 
-    public void LoadData(Data data)
+    public void LoadData(SData data)
     {
-        Data<int> enemyData = (Data<int>)data;
+        SData<int> enemyData = (SData<int>)data;
         m_TotalSpawnedEnemyCount = enemyData.value;
-    }*/
+    }
 
     private void OnDrawGizmosSelected()
     {

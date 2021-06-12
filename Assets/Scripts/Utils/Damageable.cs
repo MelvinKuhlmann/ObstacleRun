@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Damageable : MonoBehaviour //, IDataPersister
+public class Damageable : MonoBehaviour, IDataPersister
 {
     [Serializable]
     public class HealthEvent : UnityEvent<Damageable>
@@ -31,8 +31,8 @@ public class Damageable : MonoBehaviour //, IDataPersister
     public DamageEvent OnDie;
     public HealEvent OnGainHealth;
     public MaxHealthEvent OnMaxHealthSet;
-   // [HideInInspector]
-   // public DataSettings dataSettings;
+    [HideInInspector]
+    public DataSettings dataSettings;
 
     protected bool m_Invulnerable;
     protected float m_InulnerabilityTimer;
@@ -47,7 +47,7 @@ public class Damageable : MonoBehaviour //, IDataPersister
 
     void OnEnable()
     {
-   //     PersistentDataManager.RegisterPersister(this);
+        PersistentDataManager.RegisterPersister(this);
         m_CurrentHealth = startingHealth;
 
         OnHealthSet.Invoke(this);
@@ -57,7 +57,7 @@ public class Damageable : MonoBehaviour //, IDataPersister
 
     void OnDisable()
     {
-  //      PersistentDataManager.UnregisterPersister(this);
+        PersistentDataManager.UnregisterPersister(this);
     }
 
     void Update()
@@ -150,10 +150,9 @@ public class Damageable : MonoBehaviour //, IDataPersister
 
         OnMaxHealthSet.Invoke(this);
         OnHealthSet.Invoke(this);
-
     }
 
- /*   public DataSettings GetDataSettings()
+    public DataSettings GetDataSettings()
     {
         return dataSettings;
     }
@@ -164,15 +163,18 @@ public class Damageable : MonoBehaviour //, IDataPersister
         dataSettings.persistenceType = persistenceType;
     }
 
-    public Data SaveData()
+    public SData SaveData()
     {
-        return new Data<int, bool>(CurrentHealth, m_ResetHealthOnSceneReload);
+        return new SData<int, int, bool>(CurrentHealth, startingHealth, m_ResetHealthOnSceneReload);
     }
 
-    public void LoadData(Data data)
+    public void LoadData(SData data)
     {
-        Data<int, bool> healthData = (Data<int, bool>)data;
-        m_CurrentHealth = healthData.value1 ? startingHealth : healthData.value0;
+        SData<int, int, bool> healthData = (SData<int, int, bool>)data;
+
+        m_CurrentHealth = healthData.value2 ? startingHealth : healthData.value0;
+        startingHealth = healthData.value1;
+        OnMaxHealthSet.Invoke(this);
         OnHealthSet.Invoke(this);
-    }*/
+    }
 }
