@@ -190,7 +190,10 @@ public class EnemyBehaviour : MonoBehaviour
              return true;
          }*/
 
-        return Physics2D.OverlapCircle(m_CharacterController2D.frontCheck.position, m_CharacterController2D.checkRadius, m_CharacterController2D.groundedLayerMask);
+        
+
+        return Physics2D.OverlapCircle(m_CharacterController2D.frontCheck.position, m_CharacterController2D.checkRadius, m_CharacterController2D.groundedLayerMask)
+            || Physics2D.OverlapCircle(m_CharacterController2D.frontCheck.position, m_CharacterController2D.checkRadius, m_CharacterController2D.obstacleLayerMask);
 
         //return false;
     }
@@ -481,6 +484,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Hit(Damager damager, Damageable damageable)
     {
+        damageable.EnableInvulnerability();
+
+        Debug.LogWarning(damageable.CurrentHealth + " " + damager.damage);
         if (damageable.CurrentHealth <= 0)
             return;
 
@@ -501,8 +507,6 @@ public class EnemyBehaviour : MonoBehaviour
         m_FlickeringCoroutine = StartCoroutine(Flicker(damageable));
         CameraShaker.Shake(0.15f, 0.3f);
     }
-
-
 
     protected IEnumerator Flicker(Damageable damageable)
     {

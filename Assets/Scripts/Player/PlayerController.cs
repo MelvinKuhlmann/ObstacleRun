@@ -13,9 +13,6 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem dust;
 
-  //  [Header("Health")]
-   // public int maxHealth = 3;
-
     [Header("Movement")]
     public float moveSpeed = 10F;
     public float jumpForce = 25F;
@@ -312,13 +309,6 @@ public class PlayerController : MonoBehaviour
         return verticalState == PlayerVerticalState.FALLING;
     }
 
-    public void OnDamageTaken(Damager damager, Damageable damageable)
-    {
-       /* Debug.LogWarning(damager.damage + " received");
-        HealthVisual.Instance.healthSystem.Damage(damager.damage * 2);
-        damageable.EnableInvulnerability();*/
-    }
-
     public void OnHurt(Damager damager, Damageable damageable)
     {
         //if the player don't have control, we shouldn't be able to be hurt as this wouldn't be fair
@@ -344,12 +334,6 @@ public class PlayerController : MonoBehaviour
         {
           //  StartCoroutine(DieRespawnCoroutine(false, true));
         }
-    }
-
-
-    public void GetDamage(float damage)
-    {
-      //  HealthVisual.Instance.healthSystem.Damage(2);
     }
 
     public void ReceiveHealth(float healthReceived)
