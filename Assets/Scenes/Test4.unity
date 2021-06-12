@@ -1776,9 +1776,37 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 889628743}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 889628743}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IncreaseMaxHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HealthUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6411384030803462515, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
       propertyPath: m_RootOrder
       value: 13

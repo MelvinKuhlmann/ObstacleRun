@@ -74,19 +74,9 @@ public class PlayerController : MonoBehaviour
                 // SetMovementSpeed(70f);
                 break;
             case PlayerSkills.SkillType.HealthMax_1:
-            //    maxHealth= 4;
-           //     damageable.IncreaseMaxHealth(1);
-            //    HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
-                break;
             case PlayerSkills.SkillType.HealthMax_2:
-             //   maxHealth = 5;
-            //    damageable.IncreaseMaxHealth(1);
-                //  HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
-                break;
             case PlayerSkills.SkillType.HealthMax_3:
-            //    maxHealth = 6;
-            //    damageable.IncreaseMaxHealth(1);
-                //  HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
+                damageable.IncreaseMaxHealth();
                 break;
         }
     }

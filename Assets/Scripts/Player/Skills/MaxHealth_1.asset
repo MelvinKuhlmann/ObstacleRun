@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b3fccdc531574458d31288fee08923, type: 3}
   m_Name: MaxHealth_1
   m_EditorClassIdentifier: 
-  id: 0
   skillType: 5
   icon: {fileID: 2084251073510830269, guid: b9e6346c63ec2364295d7400acd556ed, type: 3}
   name: Max Health 1
   description: Increase max health with 1
   requirement: {fileID: 0}
-  unlockValue: 5
+  unlockValue: 1

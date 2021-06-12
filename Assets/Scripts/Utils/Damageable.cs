@@ -16,6 +16,10 @@ public class Damageable : MonoBehaviour //, IDataPersister
     public class HealEvent : UnityEvent<int, Damageable>
     { }
 
+    [Serializable]
+    public class MaxHealthEvent : UnityEvent<Damageable>
+    { }
+
     public int startingHealth = 5;
     public bool invulnerableAfterDamage = true;
     public float invulnerabilityDuration = 3f;
@@ -26,6 +30,7 @@ public class Damageable : MonoBehaviour //, IDataPersister
     public DamageEvent OnTakeDamage;
     public DamageEvent OnDie;
     public HealEvent OnGainHealth;
+    public MaxHealthEvent OnMaxHealthSet;
    // [HideInInspector]
    // public DataSettings dataSettings;
 
@@ -136,6 +141,16 @@ public class Damageable : MonoBehaviour //, IDataPersister
         }
 
         OnHealthSet.Invoke(this);
+    }
+
+    public void IncreaseMaxHealth()
+    {
+        startingHealth += 1;
+        m_CurrentHealth = startingHealth;
+
+        OnMaxHealthSet.Invoke(this);
+        OnHealthSet.Invoke(this);
+
     }
 
  /*   public DataSettings GetDataSettings()

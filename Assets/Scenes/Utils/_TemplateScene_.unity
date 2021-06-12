@@ -365,6 +365,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6902936799352076096, guid: d03fb9e66d480ac4ea0deed4f274964f, type: 3}
   m_PrefabInstance: {fileID: 221128784}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &238118338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3567248791411001997, guid: bc6932665a070ec4f8b7875cf04a1fcc, type: 3}
+  m_PrefabInstance: {fileID: 831743124}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2058e5f92d4c4c447a885f58b36c2790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &561472815
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,15 +669,35 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 12, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 13, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 17
+  - m_RefCount: 19
     m_Data: {fileID: 11400000, guid: 39f17f20f3114844b9787987aa3ebeda, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 17
+  - m_RefCount: 19
     m_Data: {fileID: 21300000, guid: 3098af30e9b1b1848b69b6c0225a917f, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 17
+  - m_RefCount: 19
     m_Data:
       e00: 1
       e01: 0
@@ -685,13 +716,13 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 17
+  - m_RefCount: 19
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -5, y: -4, z: 0}
-  m_Size: {x: 17, y: 4, z: 1}
+  m_Size: {x: 42, y: 4, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -747,18 +778,34 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 573729986}
     m_ColliderPaths:
-    - - X: -50000000
-        Y: -40000000
-      - X: 120000000
-        Y: -40000000
-      - X: 120000000
+    - - X: 139999900
+        Y: -40000041
+      - X: 139999900
+        Y: -29999959
+      - X: 139999959
+        Y: -29999900
+      - X: 119999959
+        Y: -29999900
+      - X: 119999900
+        Y: -29999959
+      - X: 119999900
         Y: -30000000
       - X: -50000000
         Y: -30000000
+      - X: -50000000
+        Y: -40000000
+      - X: 119999900
+        Y: -40000000
+      - X: 119999900
+        Y: -40000041
+      - X: 119999959
+        Y: -40000100
+      - X: 139999959
+        Y: -40000100
   m_CompositePaths:
     m_Paths:
-    - - {x: 11.99997, y: -4}
-      - {x: 11.99997, y: -3}
+    - - {x: 13.999967, y: -4.00001}
+      - {x: 13.999967, y: -2.99999}
       - {x: -5, y: -3.0000293}
       - {x: -4.999971, y: -4}
   m_VertexDistance: 0.0005
@@ -917,7 +964,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &937464579
 PrefabInstance:
@@ -928,7 +975,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6837380874743570180, guid: 0a0c1f122c97ab6419c773e0383023bb, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6837380874743570180, guid: 0a0c1f122c97ab6419c773e0383023bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1008,7 +1055,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1475688333
 GameObject:
@@ -1077,9 +1124,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 238118338}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 238118338}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeHitPointUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IncreaseMaxHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HealthUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 19311527, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
+      propertyPath: OnMaxHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6411384030803462515, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6411384030803462515, guid: 1a9321c0633259e46b76b695213f2d0c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1170,7 +1253,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1261463617236559748
 PrefabInstance:
@@ -1576,7 +1659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9162770662301267479, guid: 324c224995004294497d271e7819893c, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9162770662301267479, guid: 324c224995004294497d271e7819893c, type: 3}
       propertyPath: m_LocalPosition.x
