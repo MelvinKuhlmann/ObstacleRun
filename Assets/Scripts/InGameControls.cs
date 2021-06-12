@@ -2,8 +2,8 @@
 
 public class InGameControls : MonoBehaviour
 {
-    private bool menuIsActive = false;
-    public GameObject inGameMenu;
+   // private bool menuIsActive = false;
+  //  public GameObject inGameMenu;
 
     public float doubleTapTime = 0.25f;
     private float lastTapTimeLeft;
@@ -11,17 +11,12 @@ public class InGameControls : MonoBehaviour
 
     private void Awake()
     {
-        inGameMenu.SetActive(menuIsActive);
+    //    inGameMenu.SetActive(menuIsActive);
     }
 
     void FixedUpdate()
     {
         HandleMovement();
-    }
-
-    private void Update()
-    {
-        HandleMenuStuff();
     }
 
     private void HandleMovement()
@@ -85,17 +80,6 @@ public class InGameControls : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             PlayerController.instance.HandleAttack();
-        }
-    }
-
-    private void HandleMenuStuff()
-    {
-        // Needs to be in the Update and not FixedUpdate because Game ScaleTime is set to 0 when paused, FixedUpdate is not triggered at that time
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            menuIsActive = !menuIsActive;
-            GameManager.Instance.Pause(menuIsActive);
-            inGameMenu.SetActive(menuIsActive);
         }
     }
 }

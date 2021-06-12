@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    protected bool inPause = false;
     private PlayerHorizontalState horizontalState;
     private PlayerVerticalState verticalState;
     private PlayerSkills playerSkills;
@@ -99,6 +102,8 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+
+        HandleMenu();
     }
 
     void FixedUpdate()
@@ -348,5 +353,48 @@ public class PlayerController : MonoBehaviour
     public bool CanUseDash()
     {
         return playerSkills.IsSkillUnlocked(PlayerSkills.SkillType.Dash);
+    }
+
+    public void HandleMenu()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (!inPause)
+            {
+                if (ScreenFader.IsFading)
+                    return;
+
+               // PlayerInput.Instance.ReleaseControl(false);
+               // PlayerInput.Instance.Pause.GainControl();
+                inPause = true;
+                Time.timeScale = 0;
+                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+            }
+            else
+            {
+                Unpause();
+            }
+        }
+    }
+
+    public void Unpause()
+    {
+        //if the timescale is already > 0, we 
+        if (Time.timeScale > 0)
+            return;
+
+        StartCoroutine(UnpauseCoroutine());
+    }
+
+    protected IEnumerator UnpauseCoroutine()
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("UIMenus");
+      //  PlayerInput.Instance.GainControl();
+        //we have to wait for a fixed update so the pause button state change, otherwise we can get in case were the update
+        //of this script happen BEFORE the input is updated, leading to setting the game in pause once again
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForEndOfFrame();
+        inPause = false;
     }
 }

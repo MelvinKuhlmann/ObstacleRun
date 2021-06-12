@@ -6,7 +6,6 @@ using TMPro;
 
 public class UISkillTree : MonoBehaviour
 {
-    private PlayerSkills playerSkills;
     private InventoryManager inventoryManager;
     private List<SkillButtonController> skillButtonList;
 
@@ -16,24 +15,6 @@ public class UISkillTree : MonoBehaviour
     private Material skillUnlockableMaterial;
     [SerializeField]
     public TMP_Text soulsLabel;
-
-    #region singleton
-    private static UISkillTree instance;
-    public static UISkillTree Instance { get { return instance; } }
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-    #endregion
 
     private void Start()
     {
@@ -51,8 +32,6 @@ public class UISkillTree : MonoBehaviour
 
     public void SetPlayerSkills(PlayerSkills playerSkills)
     {
-        this.playerSkills = playerSkills;
-
         skillButtonList = new List<SkillButtonController>();
         skillButtonList.Add(new SkillButtonController(transform.Find("SkillBtn - MaxHealth 1"), playerSkills, skillLockedMaterial, skillUnlockableMaterial));
         skillButtonList.Add(new SkillButtonController(transform.Find("SkillBtn - MaxHealth 2"), playerSkills, skillLockedMaterial, skillUnlockableMaterial));
