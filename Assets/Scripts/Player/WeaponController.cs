@@ -7,7 +7,7 @@ public class WeaponController : MonoBehaviour
         if (collision.collider.gameObject.CompareTag(Tags.Enemy.ToString()))
         {
             // TODO spawn hitmarks on collision.contacts
-            collision.collider.gameObject.GetComponent<EnemyController>().TakeDamage(1);
+          //  collision.collider.gameObject.GetComponent<EnemyController>().TakeDamage(1);
         }
     }
 }

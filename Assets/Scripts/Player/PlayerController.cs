@@ -231,7 +231,6 @@ public class PlayerController : MonoBehaviour
         }
         if (dashTimeCounter > 0) 
         {
-            CameraController.instance.Shake(1);
             CreateDust();
             dashTimeCounter -= Time.deltaTime;
             rigidBody.velocity = Vector2.left * dashSpeed;
@@ -250,7 +249,6 @@ public class PlayerController : MonoBehaviour
         }
         if (dashTimeCounter > 0)
         {
-            CameraController.instance.Shake(1);
             CreateDust();
             dashTimeCounter -= Time.deltaTime;
             rigidBody.velocity = Vector2.right * dashSpeed;
