@@ -66,7 +66,7 @@ public static class SaveSystem
     #endregion
 
     #region InventoryData
-    public static void SaveInventory(InventoryManager inventory)
+   /* public static void SaveInventory(InventoryManager inventory)
     {
         FileStream stream = null;
         try
@@ -111,6 +111,6 @@ public static class SaveSystem
             }
         }
         return data;
-    }
+    }*/
     #endregion
 }

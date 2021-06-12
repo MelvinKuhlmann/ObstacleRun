@@ -78,3 +78,11 @@ public static class PlatformerEffector2DExtension
         return false;
     }
 }
+
+public static class LayerMaskExtension
+{
+    public static bool CheckLayerNameInMask(LayerMask layerMask, int layer)
+    {
+        return layerMask == (layerMask | 1 << layer);
+    }
+}

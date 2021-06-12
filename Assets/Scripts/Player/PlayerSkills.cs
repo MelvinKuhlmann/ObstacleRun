@@ -52,11 +52,13 @@ public class PlayerSkills
         Skill skillRequirement = GetSkillRequirement(skill);
         if (skillRequirement != null)
         {
-            return IsSkillUnlocked(skillRequirement.skillType) && skill.unlockValue <= InventoryManager.instance.GetCurrentSouls();
+            return false;
+           // return IsSkillUnlocked(skillRequirement.skillType) && skill.unlockValue <= InventoryManager.instance.GetCurrentSouls();
         }
         else
         {
-            return skill.unlockValue <= InventoryManager.instance.GetCurrentSouls();
+            return false;
+          //  return skill.unlockValue <= InventoryManager.instance.GetCurrentSouls();
         }
     }
 
@@ -69,7 +71,7 @@ public class PlayerSkills
     {
         if (CanUnlock(skill))
         {
-            InventoryManager.instance.SubtractCollectedSouls(skill.unlockValue);
+          //  InventoryManager.instance.SubtractCollectedSouls(skill.unlockValue);
             UnlockSkill(skill);
             return true;
         }

@@ -34,7 +34,7 @@ public class Soul : MonoBehaviour
     {
         if (other.CompareTag(Tags.Player.ToString()))
         {
-            InventoryManager.instance.AddCollectedSouls(containsNumberOfSouls);
+          //  InventoryManager.instance.AddCollectedSouls(containsNumberOfSouls);
             Destroy(gameObject);
         }
     }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class UISkillTree : MonoBehaviour
 {
-    private InventoryManager inventoryManager;
+   // private InventoryManager inventoryManager;
     private List<SkillButtonController> skillButtonList;
 
     [SerializeField]
@@ -19,16 +19,16 @@ public class UISkillTree : MonoBehaviour
     private void Start()
     {
         SetPlayerSkills(PlayerController.instance.GetPlayerSkills());
-        SetInventoryManager(InventoryManager.instance);
+     //   SetInventoryManager(InventoryManager.instance);
     }
 
-    public void SetInventoryManager(InventoryManager inventoryManager)
+   /* public void SetInventoryManager(InventoryManager inventoryManager)
     {
         this.inventoryManager = inventoryManager;
 
         soulsLabel.text = this.inventoryManager.GetCurrentSouls().ToString();
         this.inventoryManager.OnSoulsChanged += InventoryManager_OnSoulsChanged;
-    }
+    }*/
 
     public void SetPlayerSkills(PlayerSkills playerSkills)
     {
