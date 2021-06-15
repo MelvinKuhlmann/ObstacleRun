@@ -6,7 +6,6 @@ using TMPro;
 
 public class UISkillTree : MonoBehaviour
 {
-   // private InventoryManager inventoryManager;
     private List<SkillButtonController> skillButtonList;
 
     [SerializeField]
@@ -18,17 +17,8 @@ public class UISkillTree : MonoBehaviour
 
     private void Start()
     {
-        SetPlayerSkills(PlayerController.instance.GetPlayerSkills());
-     //   SetInventoryManager(InventoryManager.instance);
+        SetPlayerSkills(PlayerController.instance.GetComponent<PlayerSkills>());
     }
-
-   /* public void SetInventoryManager(InventoryManager inventoryManager)
-    {
-        this.inventoryManager = inventoryManager;
-
-        soulsLabel.text = this.inventoryManager.GetCurrentSouls().ToString();
-        this.inventoryManager.OnSoulsChanged += InventoryManager_OnSoulsChanged;
-    }*/
 
     public void SetPlayerSkills(PlayerSkills playerSkills)
     {
@@ -38,7 +28,7 @@ public class UISkillTree : MonoBehaviour
         skillButtonList.Add(new SkillButtonController(transform.Find("SkillBtn - MaxHealth 3"), playerSkills, skillLockedMaterial, skillUnlockableMaterial));
         skillButtonList.Add(new SkillButtonController(transform.Find("SkillBtn - Dash"), playerSkills, skillLockedMaterial, skillUnlockableMaterial));
 
-        playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
+        playerSkills.OnSkillUnlockedUI += PlayerSkills_OnSkillUnlocked;
         UpdateVisuals();
     }
 

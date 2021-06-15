@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,7 +6,6 @@ public class PlayerController : MonoBehaviour
     protected bool inPause = false;
     private PlayerHorizontalState horizontalState;
     private PlayerVerticalState verticalState;
-    private PlayerSkills playerSkills;
     private Animator animator;
     private Rigidbody2D rigidBody;
     public Damager meleeDamager;
@@ -51,10 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         if (instance == null)
         {
-           // DontDestroyOnLoad(gameObject);
             instance = this;
-            playerSkills = new PlayerSkills();
-            playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
         }
         else
         {
@@ -63,9 +58,9 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    private void PlayerSkills_OnSkillUnlocked(object sender, PlayerSkills.OnSkillUnlockedEventArgs e)
+    public void SkillUnlocked(Skill skill)
     {
-        switch (e.skill.skillType)
+        switch (skill.skillType)
         {
             case PlayerSkills.SkillType.MoveSpeed_1:
                 // SetMovementSpeed(50f);
@@ -83,18 +78,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-     //   HealthVisual.Instance.SetHealthSystem(new HealthSystem(maxHealth));
         horizontalState = PlayerHorizontalState.IDLE;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         meleeDamager.DisableDamage();
 
         dashTimeCounter = dashTime;
-    }
-
-    public PlayerSkills GetPlayerSkills()
-    {
-        return playerSkills;
     }
 
     private void Update()
@@ -341,18 +330,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ReceiveHealth(float healthReceived)
+    public bool CanUseEarthShatter() 
     {
-      //  HealthVisual.Instance.healthSystem.Heal(4);
-    }
-
-    public bool CanUseEarthShatter() {
-        return playerSkills.IsSkillUnlocked(PlayerSkills.SkillType.EarthShatter);
+        return GetComponent<PlayerSkills>().IsSkillUnlocked(PlayerSkills.SkillType.EarthShatter);
     }
 
     public bool CanUseDash()
     {
-        return playerSkills.IsSkillUnlocked(PlayerSkills.SkillType.Dash);
+        return GetComponent<PlayerSkills>().IsSkillUnlocked(PlayerSkills.SkillType.Dash);
     }
 
     public void HandleMenu()
