@@ -16,25 +16,6 @@ public class SoulUI : MonoBehaviour
         soulsLabel.text = numberOfSoulsCollected.ToString();
     }
 
-    /* #region Singleton
-     public static SoulUI instance;
-
-     private void Awake()
-     {
-        // InventoryData data = SaveSystem.LoadInventory();
-        // numberOfSoulsCollected = data.collectedSouls;
-         if (instance != null)
-         {
-             return;
-         }
-
-         instance = this;
-         soulsLabel.text = numberOfSoulsCollected.ToString();
-         soulsAddedLabel.enabled = false;
-         addedTime = addedLabelDuration;
-     }
-     #endregion*/
-
     private void Update()
     {
         if (addedTime <= 0)
@@ -47,33 +28,24 @@ public class SoulUI : MonoBehaviour
         }
     }
 
-    public void AddItem(string key, int amount)
+    public void AddItem(int amount)
     {
-        if (key.Equals("Soul"))
-        {
-            numberOfSoulsCollected += amount;
-            soulsLabel.text = numberOfSoulsCollected.ToString();
-            soulsAddedLabel.text = "+" + amount;
-            soulsAddedLabel.enabled = true;
-            addedTime = addedLabelDuration;
-        }
-    }
-
-    public void Initialize(Dictionary<string, int> items)
-    {
-        if (items.TryGetValue("Soul", out int val))
-        {
-            numberOfSoulsCollected = val;
-            soulsLabel.text = numberOfSoulsCollected.ToString();
-        }
-    }
-
-    public void SubtractCollectedSouls(int numberOfSouls)
-    {
-        numberOfSoulsCollected -= numberOfSouls;
+        numberOfSoulsCollected += amount;
         soulsLabel.text = numberOfSoulsCollected.ToString();
-      //  OnSoulsChanged?.Invoke(this, numberOfSoulsCollected);
+        soulsAddedLabel.text = "+" + amount;
+        soulsAddedLabel.enabled = true;
+        addedTime = addedLabelDuration;
+    }
 
-      //  SaveSystem.SaveInventory(this);
+    public void Initialize(int amount)
+    {
+        numberOfSoulsCollected = amount;
+        soulsLabel.text = numberOfSoulsCollected.ToString();
+    }
+
+    public void RemoveItem(int amount)
+    {
+        numberOfSoulsCollected -= amount;
+        soulsLabel.text = numberOfSoulsCollected.ToString();
     }
 }

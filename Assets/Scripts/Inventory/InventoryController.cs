@@ -9,16 +9,10 @@ public class InventoryController : MonoBehaviour, IDataPersister
     public class InventoryEvent
     {
         public string key;
-        public UnityEvent OnAdd, OnRemove;
+        public UnityEvent<int> OnRemove;
+        public UnityEvent<int> OnAdd;
+        public UnityEvent<int> OnSet;
     }
-
-    [Serializable]
-    public class ItemAddedEvent : UnityEvent<string, int>
-    { }
-
-    [Serializable]
-    public class ItemsEvent : UnityEvent<Dictionary<string, int>>
-    { }
 
     [System.Serializable]
     public class InventoryChecker
@@ -47,8 +41,6 @@ public class InventoryController : MonoBehaviour, IDataPersister
 
     public InventoryEvent[] inventoryEvents;
     public event Action OnInventoryLoaded;
-    public ItemAddedEvent OnItemAdded;
-    public ItemsEvent OnItemsSet;
 
     public DataSettings dataSettings;
 
@@ -78,28 +70,39 @@ public class InventoryController : MonoBehaviour, IDataPersister
         if (!m_InventoryItems.ContainsKey(key))
         {
             m_InventoryItems.Add(key, amount);
-            var ev = GetInventoryEvent(key);
-            if (ev != null) ev.OnAdd.Invoke();
         } else
         {
             m_InventoryItems[key] += amount;
         }
-        OnItemAdded.Invoke(key, amount);
+        var ev = GetInventoryEvent(key);
+        if (ev != null) ev.OnAdd.Invoke(amount);
     }
 
-    public void RemoveItem(string key, int amount)
+    public void SubtractItem(string key, int amount)
     {
-        //TODO fix so that we can subtract only when whe have sufficient amount
-        if (m_InventoryItems.ContainsKey(key))
+        if (m_InventoryItems.TryGetValue(key, out int val))
         {
+            if (val < amount)
+            {
+                return;
+            }
+            m_InventoryItems[key] -= amount;
             var ev = GetInventoryEvent(key);
-            if (ev != null) ev.OnRemove.Invoke();
-            m_InventoryItems.Remove(key);
+            if (ev != null) ev.OnRemove.Invoke(amount);
         }
     }
     public bool HasItem(string key)
     {
         return m_InventoryItems.ContainsKey(key);
+    }
+
+    public int GetAmount(string key)
+    {
+        if (m_InventoryItems.TryGetValue(key, out int val))
+        {
+            return val;
+        }
+        return 0;
     }
 
     public void Clear()
@@ -138,8 +141,9 @@ public class InventoryController : MonoBehaviour, IDataPersister
         foreach (KeyValuePair<string, int> kvp in inventoryData.value)
         {
             AddItem(kvp.Key, kvp.Value);
+            var ev = GetInventoryEvent(kvp.Key);
+            if (ev != null) ev.OnSet.Invoke(kvp.Value);
         }
         if (OnInventoryLoaded != null) OnInventoryLoaded();
-        OnItemsSet.Invoke(m_InventoryItems);
     }
 }

@@ -17,4 +17,4 @@ MonoBehaviour:
   name: Max Health 2
   description: Increase max health with 1
   requirement: {fileID: 11400000, guid: cdf56fdd57b800f458854ecfe53af00d, type: 2}
-  unlockValue: 1
+  unlockValue: 3
