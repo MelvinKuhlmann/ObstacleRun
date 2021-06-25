@@ -2,17 +2,9 @@
 
 public class InGameControls : MonoBehaviour
 {
-   // private bool menuIsActive = false;
-  //  public GameObject inGameMenu;
-
     public float doubleTapTime = 0.25f;
     private float lastTapTimeLeft;
     private float lastTapTimeRight;
-
-    private void Awake()
-    {
-    //    inGameMenu.SetActive(menuIsActive);
-    }
 
     void FixedUpdate()
     {

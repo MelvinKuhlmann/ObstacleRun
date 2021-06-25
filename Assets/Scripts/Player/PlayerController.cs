@@ -200,7 +200,8 @@ public class PlayerController : MonoBehaviour
             verticalState = PlayerVerticalState.JUMPING;
         } else
         {
-            isJumping = false;
+            isJumping = false; //TODO this can probably be removed
+            HandleJump();
         }
     }
 
